@@ -1,0 +1,60 @@
+.character__grid {
+    display: grid;
+    grid-template-columns: 100px 100px 100px 350px;
+}
+
+.character__portrait {
+    grid-column: 4;
+    grid-row-start: 1;
+    grid-row-end: 8;
+}
+
+.character__level_profession {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.character__experience {
+    grid-column: 1;
+    grid-row: 3;
+}
+
+.character__health {
+    grid-column: 1;
+    grid-row: 4;
+}
+
+.character__strength {
+    grid-column: 1;
+    grid-row: 2
+}
+
+.character__constitution {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.character__charisma {
+    grid-column: 3;
+    grid-row: 2;
+}
+
+.character__age {
+    grid-column: 1;
+    grid-row: 5;
+}
+
+.character__background {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 6;
+    grid-row-end: 8;
+}
+
+.character__stat {
+    text-align: center;
+}
+
+.character__stat span {
+    display: block;
+}

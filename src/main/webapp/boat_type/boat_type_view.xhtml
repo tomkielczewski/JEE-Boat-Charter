@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/WEB-INF/template/main.xhtml">
+
+    <f:metadata>
+        <f:viewParam name="id" value="#{boatTypeView.id}" required="true"/>
+<!--        <f:viewParam name="name" value="#{boatTypeView.name}" required="true"/>-->
+        <f:viewParam name="id" value="#{boatList.boatTypeId}" required="true"/>
+        <f:viewAction action="#{boatTypeView.init()}"/>
+    </f:metadata>
+
+    <ui:define name="content">
+        <h:panelGroup layout="block">
+            <article class="text--justified">
+                <header><h2><h:outputText value="#{boatTypeView.boatType.name}"/></h2></header>
+            </article>
+            <h:dataTable value="#{boatList.boats.boats}" var="boat" styleClass="data-table">
+                <h:column>
+                    <f:facet name="header">Nr</f:facet>
+                    <h:outputText value="#{boat.id}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Name</f:facet>
+                    <h:outputText value="#{boat.name}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">View</f:facet>
+                    <h:link styleClass="ui-button ui-control" outcome="/boat/boat_view.xhtml" value="view">
+                        <f:param name="id" value="#{boat.id}"/>
+                    </h:link>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">edit</f:facet>
+                    <h:link styleClass="ui-button ui-control" outcome="/boat/boat_edit.xhtml" value="edit">
+                        <f:param name="id" value="#{boat.id}"/>
+                    </h:link>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Delete</f:facet>
+                    <h:form>
+                        <h:commandButton styleClass="ui-button ui-control" value="delete" action="#{boatList.deleteAction(boat)}" />
+                    </h:form>
+                </h:column>
+            </h:dataTable>
+            <div>
+                <f:facet name="header">Create new boat</f:facet>
+                <h:link styleClass="ui-button ui-control" outcome="/boat/boat_create.xhtml" value="new">
+                    <f:param name="id" value="#{boatTypeView.id}"/>
+                </h:link>
+            </div>
+        </h:panelGroup>
+    </ui:define>
+
+</ui:composition>

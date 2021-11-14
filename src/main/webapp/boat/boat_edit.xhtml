@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/WEB-INF/template/main.xhtml">
+
+    <f:metadata>
+        <f:viewParam name="id" value="#{boatEdit.id}" required="true"/>
+        <f:viewAction action="#{boatEdit.init()}"/>
+    </f:metadata>
+
+    <ui:define name="content">
+        <h:outputStylesheet library="boat" name="css/boat_create.css"/><!-- Automatically relocated to head. -->
+        <h:panelGroup layout="block">
+            <article class="text--justified">
+                <header><h2>Edit boat info</h2></header>
+                <h:form class="boat__form">
+                    <h:outputLabel for="name" value="Name:"/><br/>
+                    <h:inputText class="ui-control ui-input" id="name" value="#{boatEdit.boat.name}"/><br/><br/>
+
+                    <h:outputLabel for="year" value="Year:"/>
+                    <h:inputText class="ui-control ui-input" id="year" value="#{boatEdit.boat.year}"/>
+
+                    <h:outputLabel for="engine" value="Engine:"/>
+                    <h:inputTextarea class="ui-control ui-input" id="engine" value="#{boatEdit.boat.engine}"/>
+
+                    <h:outputLabel for="people" value="Max number of people on board:"/>
+                    <h:inputTextarea class="ui-control" id="people" value="#{boatEdit.boat.people}"/>
+
+                    <h:commandButton class="ui-control ui-button" value="Update"
+                                     action="#{boatEdit.saveAction()}"/><br/><br/>
+                </h:form>
+            </article>
+        </h:panelGroup>
+    </ui:define>
+
+</ui:composition>

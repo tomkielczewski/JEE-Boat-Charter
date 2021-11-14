@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/WEB-INF/template/main.xhtml">
+
+    <f:metadata>
+        <f:viewParam name="id" value="#{boatView.id}" required="true"/>
+        <f:viewAction action="#{boatView.init()}"/>
+    </f:metadata>
+
+    <ui:define name="content">
+        <h:outputStylesheet library="boat" name="css/boat_view.css"/><!-- Automatically relocated to head. -->
+        <h:panelGroup layout="block">
+            <article class="text--justified">
+                <header><h2><h:outputText value="#{boatView.boat.name}"/></h2></header>
+                <div>
+<!--                    <div>-->
+<!--                        <h3>Nr: </h3><h:outputText value="#{boatView.boat.id}"/>-->
+<!--                    </div>-->
+                    <div>
+                        <h3>Boat Type: </h3><h:outputText value="#{boatView.boat.boatType}"/>
+                    </div>
+                    <div>
+                        <h3>Owner: </h3>
+                        <h:outputText value="#{boatView.boat.owner.name} "/>
+                        <h:outputText value="#{boatView.boat.owner.surname}"/>
+                    </div>
+                    <div>
+                        <h3>Details: </h3>
+                        <ul>
+                            <li>Number of sails: <h:outputText value="#{boatView.boat.numOfSails}"/></li>
+                            <li>Engine: <h:outputText value="#{boatView.boat.engine}"/> Hp</li>
+                            <li>Fuel tank capacity: <h:outputText value="#{boatView.boat.fuel}"/> l</li>
+                            <li>Water tank capacity: <h:outputText value="#{boatView.boat.water}"/> l</li>
+                            <li>Year: <h:outputText value="#{boatView.boat.year}"/></li>
+                            <li>Max number of people on board: <h:outputText value="#{boatView.boat.people}"/></li>
+                            <li>Beam: <h:outputText value="#{boatView.boat.beam}"/> m</li>
+                            <li>Length: <h:outputText value="#{boatView.boat.length}"/> m</li>
+                            <li>Draught: <h:outputText value="#{boatView.boat.draught}"/> m</li>
+                        </ul>
+                    </div>
+                    <br/>
+<!--                    <div class="boat__picture">-->
+<!--                        <h:graphicImage value="#{boatView.boat.picture}"/>-->
+<!--                    </div>-->
+                    <div>
+                        <f:facet name="header">Edit</f:facet>
+                        <h:link styleClass="ui-button ui-control" outcome="/boat/boat_edit.xhtml" value="edit">
+                            <f:param name="id" value="#{boatView.boat.id}"/>
+                        </h:link>
+                    </div>
+                </div>
+            </article>
+        </h:panelGroup>
+    </ui:define>
+
+</ui:composition>
+
+<!--        name(boat.getName())-->
+<!--        .numOfSails(boat.getNumOfSails())-->
+<!--        .engine(boat.getEngine())-->
+<!--        .fuel(boat.getFuel())-->
+<!--        .water(boat.getWater())-->
+<!--        .year(boat.getYear())-->
+<!--        .people(boat.getPeople())-->
+<!--        .beam(boat.getBeam())-->
+<!--        .length(boat.getLength())-->
+<!--        .draught(boat.getDraught())-->
+<!--        //                .owner(userSupplier.get())-->
+<!--        //                .boatType(boatTypeFunction.apply(boat.getName()))-->
+<!--        //                .picture("/api/pictures/" + boat.getId())-->

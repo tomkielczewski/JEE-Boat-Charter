@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/WEB-INF/template/main.xhtml">
+
+    <f:metadata>
+        <f:viewParam name="id" value="#{boatCreate.boatTypeId}" required="true"/>
+        <f:viewAction action="#{boatCreate.init()}"/>
+    </f:metadata>
+
+    <ui:define name="content">
+        <h:outputStylesheet library="boat" name="css/boat_create.css"/><!-- Automatically relocated to head. -->
+        <h:panelGroup layout="block">
+            <article class="text--justified">
+                <header><h2>Create boat</h2></header>
+                <h:form class="boat__form">
+
+                    <h:outputLabel for="name" value="Name:"/>
+                    <h:inputText class="ui-control ui-input" id="name" value="#{boatCreate.boat.name}"/>
+
+                    <h:outputLabel for="year" value="Year:"/>
+                    <h:inputText class="ui-control ui-input" id="year" value="#{boatCreate.boat.year}"/>
+
+                    <h:outputLabel for="engine" value="Engine:"/>
+                    <h:inputTextarea class="ui-control ui-input" id="engine" value="#{boatCreate.boat.engine}"/>
+
+                    <h:outputLabel for="people" value="Max number of people on board:"/>
+                    <h:inputTextarea class="ui-control ui-input" id="people" value="#{boatCreate.boat.people}"/>
+
+                    <h:commandButton class="ui-control ui-button" value="Create" immediate="true"
+                                     action="#{boatCreate.saveAction()}"/>
+                </h:form>
+            </article>
+
+<!--            <article class="text&#45;&#45;justified">-->
+<!--                <header><h2>Edit boat picture</h2></header>-->
+<!--                <h:form class="boat__form" enctype="multipart/form-data">-->
+<!--                    <h:outputLabel for="picture" value="Picture:"/>-->
+<!--                    <h:inputFile class="ui-control ui-button" id="picture" value="#{boatCreate.picture}"/>-->
+<!--                    <h:commandButton class="ui-control ui-button" value="Upload" action="#{boatCreate.uploadAction}"/>-->
+<!--                </h:form>-->
+<!--            </article>-->
+        </h:panelGroup>
+    </ui:define>
+    <h:messages/>
+
+
+</ui:composition>
+
+
+<!--<div>-->
+<!--<h3>Boat Type: </h3><h:outputText value="#{boatView.boat.boatType}"/>-->
+<!--</div>-->
+<!--<div>-->
+<!--<h3>Owner: </h3>-->
+<!--<h:outputText value="#{boatView.boat.owner.name} "/>-->
+<!--<h:outputText value="#{boatView.boat.owner.surname}"/>-->
+<!--</div>-->
+<!--<div>-->
+<!--<h3>Details: </h3>-->
+<!--<ul>-->
+<!--    <li>Number of sails: <h:outputText value="#{boatView.boat.numOfSails}"/></li>-->
+<!--    <li>Engine: <h:outputText value="#{boatView.boat.engine}"/> Hp</li>-->
+<!--    <li>Fuel tank capacity: <h:outputText value="#{boatView.boat.fuel}"/> l</li>-->
+<!--    <li>Water tank capacity: <h:outputText value="#{boatView.boat.water}"/> l</li>-->
+<!--    <li>Year: <h:outputText value="#{boatView.boat.year}"/></li>-->
+<!--    <li>Max number of people on board: <h:outputText value="#{boatView.boat.people}"/></li>-->
+<!--    <li>Beam: <h:outputText value="#{boatView.boat.beam}"/> m</li>-->
+<!--    <li>Length: <h:outputText value="#{boatView.boat.length}"/> m</li>-->
+<!--    <li>Draught: <h:outputText value="#{boatView.boat.draught}"/> m</li>-->
+<!--</ul>-->
+<!--</div>-->
+<!--<br/>-->

@@ -1,0 +1,190 @@
+PUT http://localhost:9080/boat-charter/api/avatar/update/kevin
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="avatar"; filename="uhlbrecht.png'
+
+< /home/student/165625/boat-charter/src/main/resources/pl/edu/pg/eti/kask/boatcharter/configuration/avatar/zereni.png
+--boundary--
+
+###
+
+POST http://localhost:9080/boat-charter/api/avatar/set/kevin
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="avatar"; filename="uhlbrecht.png'
+
+< /home/student/165625/boat-charter/src/main/resources/pl/edu/pg/eti/kask/boatcharter/configuration/avatar/uhlbrecht.png
+--boundary--
+
+<> 2021-10-26T121634.400.txt
+
+###
+
+PUT http://localhost:9080/boat-charter/api/avatar/update/kevin
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="avatar"; filename="uhlbrecht.png'
+
+< /home/student/165625/boat-charter/src/main/resources/pl/edu/pg/eti/kask/boatcharter/configuration/avatar/uhlbrecht.png
+--boundary--
+
+###
+
+GET http://localhost:9080/boat-charter/api/users
+
+<> 2021-10-26T121457.200.txt
+
+###
+
+GET http://localhost:9080/boat-charter/api/user?id=kevin
+
+<> 2021-10-26T121452.200.txt
+
+###
+
+GET http://localhost:9080/boat-charter/api/user?id=kevin
+
+<> 2021-10-26T121436.200.txt
+
+###
+
+PUT http://localhost:9080/boat-charter/api/avatar/update/kevin
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="avatar"; filename="uhlbrecht.png'
+
+< /home/student/165625/boat-charter/src/main/resources/pl/edu/pg/eti/kask/boatcharter/configuration/avatar/zereni.png
+--boundary--
+
+###
+
+GET http://localhost:9080/boat-charter/api/users
+
+<> 2021-10-26T120910.200.txt
+
+###
+
+GET http://localhost:9080/boat-charter/api/user?id=kevin
+
+<> 2021-10-26T120907.200.txt
+
+###
+
+GET http://localhost:9080/simple-rpg/api/user
+
+<> 2021-10-26T120833.404.html
+
+###
+
+GET http://localhost:9080/boat-charter/api/user?id=kevin
+
+<> 2021-10-26T120810.200.txt
+
+###
+
+GET http://localhost:9080/boat-charter/api/users
+
+<> 2021-10-26T120800.200.txt
+
+###
+
+PUT http://localhost:9080/boat-charter/api/avatar/update/kevin
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="avatar"; filename="uhlbrecht.png'
+
+< /home/student/165625/boat-charter/src/main/resources/pl/edu/pg/eti/kask/boatcharter/configuration/avatar/zereni.png
+--boundary--
+
+###
+
+PUT http://localhost:9080/boat-charter/api/avatar/update/kevin
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="avatar"; filename="uhlbrecht.png'
+
+< /home/student/165625/boat-charter/src/main/resources/pl/edu/pg/eti/kask/boatcharter/configuration/avatar/uhlbrecht.png
+--boundary--
+
+###
+
+PUT http://localhost:9080/boat-charter/api/avatar/kevin
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="avatar"; filename="uhlbrecht.png'
+
+< /home/student/165625/boat-charter/src/main/resources/pl/edu/pg/eti/kask/boatcharter/configuration/avatar/uhlbrecht.png
+--boundary--
+
+<> 2021-10-26T112003.400.html
+
+###
+
+PUT http://localhost:9080/boat-charter/api/avatar/kevin
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="avatar"; filename="uhlbrecht.png'
+
+< /home/student/165625/boat-charter/src/main/resources/pl/edu/pg/eti/kask/boatcharter/configuration/avatar/uhlbrecht.png
+--boundary--
+
+<> 2021-10-26T111048.400.html
+
+###
+
+GET http://localhost:9080/boat-charter/api/avatar/kevin
+
+<> 2021-10-26T110619.200.txt
+
+###
+
+GET http://localhost:9080/boat-charter/api/users
+
+<> 2021-10-26T110401.200.txt
+
+###
+
+GET http://localhost:9080/boat-charter/api/user?id=kevin
+
+<> 2021-10-26T110347.200.txt
+
+###
+
+GET http://localhost:9080/boat-charter/api/user?id=alice
+
+<> 2021-10-26T110337.200.txt
+
+###
+
+GET http://localhost:9080/boat-charter/api/user/?id=kevin
+
+<> 2021-10-26T110152.404.html
+
+###
+
+GET http://localhost:9080/boat-charter/api/user/kevin
+
+<> 2021-10-26T110100.404.html
+
+###
+
+GET http://localhost:9080/boat-charter/api/user/kevin
+
+<> 2021-10-26T105640.404.html
+
+###
+
+GET http://localhost:9080/boat-charter/api/user
+
+<> 2021-10-26T105622.200.txt
+
+###
+

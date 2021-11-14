@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <f:view>
+        <h:head>
+            <meta charset="UTF-8"/>
+            <meta name="description" content="Simple Boat Charter web application"/>
+            <meta name="keywords" content="Boat Charter"/>
+            <meta name="author" content="Tomasz Kiełczewski"/>
+            <title>Boat Charter</title>
+
+            <h:outputStylesheet library="default" name="css/styles.css"/>
+        </h:head>
+        <h:body>
+            <div class="container">
+                <header class="header">
+<!--                    <div style="display: inline-block; width: 470px; text-align: left;">-->
+<!--                        <h:graphicImage style="width: 50px; height: 50px; margin: 10px;" value="#{resource['images:background.jpg']}"/>-->
+<!--                    </div>-->
+<!--                    <div style="display: inline-block; height: 20px; width: 500px; text-align: left;"><h1>Windsurf equipment rental</h1></div>-->
+
+                    <div style="display: inline-block; width: 470px; text-align: left;">
+                        <h:graphicImage alt="/index.xhtml" style="width: 30%; height: 50px; margin-top: 10px; margin-left: 10px" value="#{resource['images:logo.png']}"/>
+                    </div>
+                    <h1 style="display: inline-block;" >Boat Charter</h1>
+<!--                    <h:form rendered="#{!userContext.authorized}">-->
+<!--                        <h:outputLabel value="Login:" for="login"/>-->
+<!--                        <h:inputText id="login" class="ui-control ui-input" value="#{userLogin.login}"/>-->
+<!--                        <h:outputLabel value="Password:" for="password"/>-->
+<!--                        <h:inputSecret id="password" class="ui-control ui-input" value="#{userLogin.password}"/>-->
+<!--                        <h:commandButton class="ui-control ui-button" type="submit" value="Login" action="#{userLogin.loginAction()}"/>-->
+<!--                    </h:form>-->
+<!--                    <h:form rendered="#{userContext.authorized}">-->
+<!--                        Logged as: <h:outputText value="#{userContext.principal}"/>-->
+<!--                        <h:commandButton class="ui-control ui-button" value="Logout" action="#{userLogout.logoutAction()}"/>-->
+<!--                    </h:form>-->
+                </header>
+
+                <nav class="navigation-bar">
+                    <ul>
+                        <li><h:link outcome="/index.xhtml">Main</h:link></li>
+                        <li><h:link outcome="/about/about.xhtml">About</h:link></li>
+                        <li><h:link outcome="/boat_type/boat_type_list.xhtml">Boat Types</h:link></li>
+                    </ul>
+                </nav>
+
+                <section class="main-section">
+                    <ui:insert name="content"/>
+                </section>
+
+                <footer class="footer">
+                    <p>Copyright 2021, Tomasz Kiełczewski</p>
+                </footer>
+            </div>
+        </h:body>
+    </f:view>
+</html>
