@@ -252,7 +252,7 @@ public class BoatServlet extends HttpServlet {
 
             Boat boat = CreateBoatRequest
 //                    .dtoToEntityMapper(name -> boatTypeService.find(name).orElse(null), user::get)
-                    .dtoToEntityMapper()
+                    .dtoToEntityMapper(() -> null)
                     .apply(requestBody);
 
             try {

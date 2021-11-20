@@ -7,6 +7,9 @@ import pl.edu.pg.eti.kask.boatcharter.boat.repository.BoatRepository;
 import pl.edu.pg.eti.kask.boatcharter.boatType.repository.BoatTypeRepository;
 import pl.edu.pg.eti.kask.boatcharter.user.entity.User;
 
+import javax.annotation.security.RolesAllowed;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -18,8 +21,10 @@ import java.util.Optional;
 /**
  * Service layer for all business actions regarding boat entity.
  */
-@ApplicationScoped
-@NoArgsConstructor//Empty constructor is required for creating proxy while CDI injection.
+@Stateless
+@LocalBean
+@NoArgsConstructor
+//@RolesAllowed(UserRoles.USER)
 public class BoatService {
 
     /**
@@ -86,7 +91,6 @@ public class BoatService {
      *
      * @param boat new boat
      */
-    @Transactional
     public void create(Boat boat) {
         repository.create(boat);
         boatTypeRepository.find(boat.getBoatType().getId()).ifPresent(boatType -> {
@@ -99,7 +103,6 @@ public class BoatService {
      *
      * @param boat boat to be updated
      */
-    @Transactional
     public void update(Boat boat) {
         repository.update(boat);
     }
@@ -109,7 +112,6 @@ public class BoatService {
      *
      * @param boatId existing boat's id to be deleted
      */
-    @Transactional
     public void delete(Long boatId) {
         Boat boat = repository.find(boatId).orElseThrow();
         User owner = boat.getOwner();
@@ -120,8 +122,7 @@ public class BoatService {
         boatType.getBoats().remove(boat);
         repository.delete(boat);
     }
-    
-    @Transactional
+
     public void delete(BoatType boatType) {
         List<Boat> boats = repository.findAllByType(boatType);
         boats.forEach(boat -> {
@@ -134,7 +135,6 @@ public class BoatService {
         repository.deleteByBoatType(boatType);
     }
 
-    @Transactional
     public void deleteAll() { repository.deleteAll(); }
 
     /**

@@ -7,6 +7,7 @@ import pl.edu.pg.eti.kask.boatcharter.boatType.dto.UpdateBoatTypeRequest;
 import pl.edu.pg.eti.kask.boatcharter.boatType.entity.BoatType;
 import pl.edu.pg.eti.kask.boatcharter.boatType.service.BoatTypeService;
 
+import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -36,7 +37,7 @@ public class BoatTypeController {
     /**
      * @param service service for managing boatTypes
      */
-    @Inject
+    @EJB
     public void setService(BoatTypeService service) {
         this.service = service;
     }

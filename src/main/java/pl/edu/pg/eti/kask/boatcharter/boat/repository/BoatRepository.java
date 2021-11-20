@@ -5,6 +5,7 @@ import pl.edu.pg.eti.kask.boatcharter.boatType.entity.BoatType;
 import pl.edu.pg.eti.kask.boatcharter.repository.Repository;
 import pl.edu.pg.eti.kask.boatcharter.user.entity.User;
 
+import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -15,7 +16,7 @@ import java.util.Optional;
 /**
  * Repository for boat entity. Repositories should be used in business layer (e.g.: in services).
  */
-@RequestScoped
+@Dependent
 public class BoatRepository implements Repository<Boat, Long> {
 
     /**

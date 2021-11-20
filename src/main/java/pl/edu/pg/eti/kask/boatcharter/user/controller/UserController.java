@@ -38,8 +38,7 @@ public class UserController {
     /**
      * @param service service for managing users
      */
-//    @EJB
-    @Inject
+    @EJB
     public void setService(UserService service) {
         this.service = service;
     }

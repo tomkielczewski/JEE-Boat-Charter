@@ -4,6 +4,9 @@ import lombok.NoArgsConstructor;
 import pl.edu.pg.eti.kask.boatcharter.boatType.entity.BoatType;
 import pl.edu.pg.eti.kask.boatcharter.boatType.repository.BoatTypeRepository;
 
+import javax.annotation.security.RolesAllowed;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -13,8 +16,10 @@ import java.util.Optional;
 /**
  * Service layer for all business actions regarding character's boatType entity.
  */
-@ApplicationScoped
-@NoArgsConstructor//Empty constructor is required for creating proxy while CDI injection.
+@Stateless
+@LocalBean
+@NoArgsConstructor
+//@RolesAllowed(UserRoles.USER)
 public class BoatTypeService {
 
     /**
@@ -60,23 +65,19 @@ public class BoatTypeService {
      *
      * @param boatType new boatType to be saved
      */
-    @Transactional
     public void create(BoatType boatType) {
         repository.create(boatType);
     }
 
-    @Transactional
     public void delete(Long boatTypeId) {
         BoatType boatType = repository.find(boatTypeId).orElseThrow();
         repository.delete(boatType);
     }
 
-    @Transactional
     public void update(BoatType boatType) {
         repository.update(boatType);
     }
 
-    @Transactional
     public void deleteAll() { repository.deleteAll(); }
 
 }

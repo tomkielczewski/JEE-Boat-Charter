@@ -1,5 +1,6 @@
 package pl.edu.pg.eti.kask.boatcharter.user.repository;
 
+import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -10,7 +11,7 @@ import lombok.extern.java.Log;
 import pl.edu.pg.eti.kask.boatcharter.repository.Repository;
 import pl.edu.pg.eti.kask.boatcharter.user.entity.User;
 
-@RequestScoped
+@Dependent
 @Log
 public class UserRepository implements Repository<User, String> {
 

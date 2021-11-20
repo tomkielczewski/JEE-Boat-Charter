@@ -11,6 +11,7 @@ import pl.edu.pg.eti.kask.boatcharter.boat.service.BoatService;
 import pl.edu.pg.eti.kask.boatcharter.boatType.entity.BoatType;
 import pl.edu.pg.eti.kask.boatcharter.boatType.service.BoatTypeService;
 
+import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -30,12 +31,12 @@ public class BoatTypeBoatController {
     public BoatTypeBoatController() {
     }
 
-    @Inject
+    @EJB
     public void setBoatTypeService(BoatTypeService boatTypeService) {
         this.boatTypeService = boatTypeService;
     }
 
-    @Inject
+    @EJB
     public void setBoatService(BoatService boatService) {
         this.boatService = boatService;
     }
@@ -91,7 +92,7 @@ public class BoatTypeBoatController {
             }else {
                 newBoatId = 1L;
             }
-            Boat boat = CreateBoatRequest.dtoToEntityMapper().apply(request);
+            Boat boat = CreateBoatRequest.dtoToEntityMapper(() -> null).apply(request);
             boat.setId(newBoatId);
             boat.setBoatType(boatType.get());
             boatService.create(boat);

@@ -4,7 +4,10 @@ import lombok.NoArgsConstructor;
 import pl.edu.pg.eti.kask.boatcharter.user.entity.User;
 import pl.edu.pg.eti.kask.boatcharter.user.repository.UserRepository;
 
+import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -16,8 +19,10 @@ import java.util.Optional;
 /**
  * Service layer for all business actions regarding user entity.
  */
-@ApplicationScoped
+@Stateless
+@LocalBean
 @NoArgsConstructor//Empty constructor is required for creating proxy while CDI injection.
+//@RolesAllowed(UserRoles.USER)
 public class UserService {
 
     private UserRepository repository;
@@ -39,7 +44,7 @@ public class UserService {
         return repository.findAll();
     }
 
-    @Transactional
+//    @PermitAll
     public void create(User user) {
         repository.create(user);
     }
@@ -48,7 +53,6 @@ public class UserService {
      * @param user user to be removed
      */
 //    @RolesAllowed(UserRoles.ADMIN)
-    @Transactional
     public void delete(User user) {
         repository.delete(user);
     }

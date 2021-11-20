@@ -6,6 +6,7 @@ import pl.edu.pg.eti.kask.boatcharter.boat.dto.GetBoatsResponse;
 import pl.edu.pg.eti.kask.boatcharter.boat.entity.Boat;
 import pl.edu.pg.eti.kask.boatcharter.boat.service.BoatService;
 
+import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -21,7 +22,7 @@ public class BoatController {
 
     BoatService boatService;
 
-    @Inject
+    @EJB
     public void setBoatService(BoatService boatService) {
         this.boatService = boatService;
     }

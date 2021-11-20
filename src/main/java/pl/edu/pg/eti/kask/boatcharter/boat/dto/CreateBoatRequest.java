@@ -80,7 +80,7 @@ public class CreateBoatRequest {
      */
     public static Function<CreateBoatRequest, Boat> dtoToEntityMapper(
 //            Function<Long, BoatType> boatTypeFunction,
-//            Supplier<User> userSupplier
+            Supplier<User> userSupplier
     ) {
         return request -> Boat.builder()
                 .id(request.getId())
@@ -94,7 +94,7 @@ public class CreateBoatRequest {
                 .beam(request.getBeam())
                 .length(request.getLength())
                 .draught(request.getDraught())
-//                .owner(userSupplier.get())
+                .owner(userSupplier.get())
 //                .boatType(boatTypeFunction.apply(request.getBoatType()))
                 .build();
     }
