@@ -8,6 +8,7 @@ import pl.edu.pg.eti.kask.boatcharter.boat.service.BoatService;
 import pl.edu.pg.eti.kask.boatcharter.boatType.service.BoatTypeService;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -16,7 +17,7 @@ import java.util.Optional;
 /**
  * View bean for rendering list of boats.
  */
-@RequestScoped
+@ViewScoped
 @Named
 public class BoatList implements Serializable {
 
@@ -69,9 +70,10 @@ public class BoatList implements Serializable {
      */
     public String deleteAction(BoatsModel.Boat boat) {
         boatService.delete(boat.getId());
-//        return "boat_type/boat_type_view?id=" + this.boatTypeId + "&faces-redirect=true";
-        return "boat_type/boat_type_view?id=2&faces-redirect=true";
+        return "boat_type_view?id=" + this.boatTypeId + "&faces-redirect=true";
+//        return "boat_type/boat_type_view?id=2&faces-redirect=true";
 
     }
+
 
 }

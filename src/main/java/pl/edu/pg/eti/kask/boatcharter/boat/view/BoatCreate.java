@@ -45,7 +45,7 @@ public class BoatCreate implements Serializable {
             this.id = Collections.max(boats
                     .stream()
                     .map(Boat::getId)
-                    .collect(Collectors.toList()));
+                    .collect(Collectors.toList())) + 1;
         }else {
             this.id = 1L;
         }

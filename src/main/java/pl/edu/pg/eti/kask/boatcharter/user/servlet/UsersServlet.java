@@ -42,7 +42,7 @@ public class UsersServlet extends HttpServlet {
         /**
          * Specified portrait for download and upload.
          */
-        public static final String USERS = "/api/users";
+        public static final String USERS = "/api_v1/users";
 
     }
 

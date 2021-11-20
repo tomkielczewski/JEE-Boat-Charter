@@ -79,6 +79,8 @@ public class GetBoatResponse {
      */
     private String boatType;
 
+    private String owner;
+
     /**
      * @return mapper for convenient converting entity object to dto object
      */
@@ -96,6 +98,7 @@ public class GetBoatResponse {
                 .length(boat.getLength())
                 .draught(boat.getDraught())
                 .boatType(boat.getBoatType().getName())
+//                .owner(boat.getOwner().getName())
                 .build();
     }
 

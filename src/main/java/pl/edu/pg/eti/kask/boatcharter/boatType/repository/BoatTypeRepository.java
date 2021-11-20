@@ -66,3 +66,4 @@ public class BoatTypeRepository implements Repository<BoatType, Long> {
     }
     
 }
+

@@ -61,17 +61,17 @@ public class BoatEditModel {
     public static BiFunction<Boat, BoatEditModel, Boat> modelToEntityUpdater() {
         return (boat, request) -> {
             boat.setName(request.getName());
-//                boat.setNumOfSails(request.getNumOfSails());
+            boat.setNumOfSails(request.getNumOfSails());
             boat.setEngine(request.getEngine());
-//                boat.setFuel(request.getFuel());
-//                boat.setWater(request.getWater());
+            boat.setFuel(request.getFuel());
+            boat.setWater(request.getWater());
             boat.setYear(request.getYear());
             boat.setPeople(request.getPeople());
-//                boat.setBeam(request.getBeam());
-//                boat.setLength(request.getLength());
-//                boat.setDraught(request.getDraught());
-//                boat.setOwner(request.getOwner());
-//                boat.setBoatType(request.getBoatType());
+            boat.setBeam(request.getBeam());
+            boat.setLength(request.getLength());
+            boat.setDraught(request.getDraught());
+//            boat.setOwner(request.getOwner());
+//            boat.setBoatType(request.getBoatType());
 //                boat.setPicture("/api/pictures/" + request.getId());
             return boat;
         };

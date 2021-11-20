@@ -19,6 +19,9 @@
                     <h:outputLabel for="name" value="Name:"/><br/>
                     <h:inputText class="ui-control ui-input" id="name" value="#{boatEdit.boat.name}"/><br/><br/>
 
+                    <h:outputLabel for="numOfSails" value="Number of sails:"/>
+                    <h:inputText class="ui-control ui-input" id="numOfSails" value="#{boatEdit.boat.numOfSails}"/>
+
                     <h:outputLabel for="year" value="Year:"/>
                     <h:inputText class="ui-control ui-input" id="year" value="#{boatEdit.boat.year}"/>
 
@@ -26,7 +29,23 @@
                     <h:inputTextarea class="ui-control ui-input" id="engine" value="#{boatEdit.boat.engine}"/>
 
                     <h:outputLabel for="people" value="Max number of people on board:"/>
-                    <h:inputTextarea class="ui-control" id="people" value="#{boatEdit.boat.people}"/>
+                    <h:inputTextarea class="ui-control ui-input" id="people" value="#{boatEdit.boat.people}"/>
+
+                    <h:outputLabel for="fuel" value="Fuel tank capacity:"/>
+                    <h:inputText class="ui-control ui-input" id="fuel" value="#{boatEdit.boat.fuel}"/>
+
+                    <h:outputLabel for="water" value="Water tank capacity:"/>
+                    <h:inputText class="ui-control ui-input" id="water" value="#{boatEdit.boat.water}"/>
+
+                    <h:outputLabel for="beam" value="Beam:"/>
+                    <h:inputText class="ui-control ui-input" id="beam" value="#{boatEdit.boat.beam}"/>
+
+                    <h:outputLabel for="length" value="Length:"/>
+                    <h:inputText class="ui-control ui-input" id="length" value="#{boatEdit.boat.length}"/>
+
+                    <h:outputLabel for="draught" value="Draught:"/>
+                    <h:inputText class="ui-control ui-input" id="draught" value="#{boatEdit.boat.draught}"/>
+
 
                     <h:commandButton class="ui-control ui-button" value="Update"
                                      action="#{boatEdit.saveAction()}"/><br/><br/>

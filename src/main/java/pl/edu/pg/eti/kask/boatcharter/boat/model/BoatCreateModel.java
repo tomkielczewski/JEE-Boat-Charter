@@ -6,6 +6,7 @@ import pl.edu.pg.eti.kask.boatcharter.boatType.entity.BoatType;
 import pl.edu.pg.eti.kask.boatcharter.user.entity.User;
 
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 @Getter
 @Setter
@@ -84,15 +85,6 @@ public class BoatCreateModel {
      */
 //    private String picture;
 
-//    public static Function<Equipment, EquipmentNewModel> entityToModelMapper() {
-//        return equipment -> EquipmentNewModel.builder()
-//                .name(equipment.getName())
-//                .description(equipment.getDescription())
-//                .rentPrice(equipment.getRentPrice())
-//                .componentsNames(equipment.getComponentsNames())
-//                .build();
-//    }
-
     /**
      * @return mapper for convenient converting entity object to dto object
      */
@@ -118,17 +110,17 @@ public class BoatCreateModel {
         return model -> Boat.builder()
                 .id(model.getId())
                 .name(model.getName())
-//                .numOfSails(model.getNumOfSails())
+                .numOfSails(model.getNumOfSails())
                 .engine(model.getEngine())
-//                .fuel(model.getFuel())
-//                .water(model.getWater())
+                .fuel(model.getFuel())
+                .water(model.getWater())
                 .year(model.getYear())
                 .people(model.getPeople())
-//                .beam(model.getBeam())
-//                .length(model.getLength())
-//                .draught(model.getDraught())
+                .beam(model.getBeam())
+                .length(model.getLength())
+                .draught(model.getDraught())
 //                .owner(model.getOwner())
-//                .boatType(model.getBoatType())
+                .boatType(model.getBoatType())
 //                .picture("/api/pictures/" + model.getId())
                 .build();
     }

@@ -4,6 +4,7 @@ import lombok.NoArgsConstructor;
 import pl.edu.pg.eti.kask.boatcharter.user.entity.User;
 import pl.edu.pg.eti.kask.boatcharter.user.repository.UserRepository;
 
+import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -41,6 +42,15 @@ public class UserService {
     @Transactional
     public void create(User user) {
         repository.create(user);
+    }
+
+    /**
+     * @param user user to be removed
+     */
+//    @RolesAllowed(UserRoles.ADMIN)
+    @Transactional
+    public void delete(User user) {
+        repository.delete(user);
     }
 
 
