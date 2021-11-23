@@ -50,6 +50,7 @@ public class UserController {
      */
     @GET
     @Path("/users")
+    @RolesAllowed(UserRoles.ADMIN)
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUsers() {
         return Response
@@ -83,6 +84,7 @@ public class UserController {
     @GET
     @Path("/user")
     @Produces(MediaType.APPLICATION_JSON)
+
     public Response getUser() {
         Optional<User> user = service.findCallerPrincipal();
         if (user.isPresent()) {

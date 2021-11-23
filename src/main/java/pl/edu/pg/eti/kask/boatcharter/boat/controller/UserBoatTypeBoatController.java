@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Path("")
 @RolesAllowed(UserRoles.USER)
 public class UserBoatTypeBoatController {
 
@@ -83,24 +84,24 @@ public class UserBoatTypeBoatController {
         }
     }
 
-//    @GET
-//    @Path("user/boat_types/{boatTypeId}/boats/{boatId}")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Response getBoat(@PathParam("boatTypeId") Long boatTypeId, @PathParam("boatId") Long boatId) {
-//        Optional<BoatType> boatType = boatTypeService.find(boatTypeId);
-//        Optional<Boat> boat = boatService.find(boatId);
-//        if(boatType.isPresent() && boat.isPresent()){
-//            if(boat.get().getBoatType().equals(boatType.get())){
-//                return Response.ok(GetBoatResponse.entityToDtoMapper()
-//                        .apply(boat.get()))
-//                        .build();
-//            } else {
-//                return Response.status(Response.Status.BAD_REQUEST).build();
-//            }
-//        } else {
-//            return Response.status(Response.Status.NOT_FOUND).build();
-//        }
-//    }
+    @GET
+    @Path("user/boat_types/{boatTypeId}/boats/{boatId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getBoat(@PathParam("boatTypeId") Long boatTypeId, @PathParam("boatId") Long boatId) {
+        Optional<BoatType> boatType = boatTypeService.find(boatTypeId);
+        Optional<Boat> boat = boatService.find(boatId);
+        if(boatType.isPresent() && boat.isPresent()){
+            if(boat.get().getBoatType().equals(boatType.get())){
+                return Response.ok(GetBoatResponse.entityToDtoMapper()
+                        .apply(boat.get()))
+                        .build();
+            } else {
+                return Response.status(Response.Status.BAD_REQUEST).build();
+            }
+        } else {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+    }
 
 
     @POST
@@ -133,7 +134,7 @@ public class UserBoatTypeBoatController {
 
 
     @PUT
-    @Path("user/{login}/boat_types/{boatTypeId}/boats/{boatId}")
+    @Path("users/{login}/boat_types/{boatTypeId}/boats/{boatId}")
     @RolesAllowed(UserRoles.ADMIN)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateBoat(@PathParam("login") String login, @PathParam("boatTypeId") Long boatTypeId, @PathParam("boatId") Long boatId, UpdateBoatRequest request){
@@ -205,7 +206,7 @@ public class UserBoatTypeBoatController {
 
     @DELETE
     @RolesAllowed(UserRoles.ADMIN)
-    @Path("user/{login}/boat_types/{boatTypeId}/boats/{boatId}")
+    @Path("users/{login}/boat_types/{boatTypeId}/boats/{boatId}")
     public Response deleteBoat(@PathParam("login") String login, @PathParam("boatTypeId") Long boatTypeId, @PathParam("boatId") Long boatId){
         Optional<BoatType> boatType = boatTypeService.find(boatTypeId);
         Optional<Boat> boat = boatService.find(boatId);

@@ -115,7 +115,7 @@ public class BoatRepository implements Repository<Boat, Long> {
     }
 
     public List<Boat> findAllByUserAndBoatType(User user, BoatType boatType) {
-        return em.createQuery("select b from Boat b where b.owner = :user and c.boatType = :boatType", Boat.class)
+        return em.createQuery("select b from Boat b where b.owner = :user and b.boatType = :boatType", Boat.class)
                 .setParameter("user", user)
                 .setParameter("boatType", boatType)
                 .getResultList();
