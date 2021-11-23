@@ -83,6 +83,7 @@ public class BoatRepository implements Repository<Boat, Long> {
                 .getResultList();
     }
 
+
     /**
      * Seeks for single user's boat.
      *
@@ -92,7 +93,7 @@ public class BoatRepository implements Repository<Boat, Long> {
      */
     public Optional<Boat> findByIdAndUser(Long id, User user) {
         try {
-            return Optional.of(em.createQuery("select c from Boat c where c.id = :id and c.user = :user", Boat.class)
+            return Optional.of(em.createQuery("select c from Boat c where c.id = :id and c.owner = :user", Boat.class)
                     .setParameter("user", user)
                     .setParameter("id", id)
                     .getSingleResult());
@@ -108,8 +109,15 @@ public class BoatRepository implements Repository<Boat, Long> {
      * @return list (can be empty) of user's boats
      */
     public List<Boat> findAllByUser(User user) {
-        return em.createQuery("select c from Boat c where c.user = :user", Boat.class)
+        return em.createQuery("select c from Boat c where c.owner = :user", Boat.class)
                 .setParameter("user", user)
+                .getResultList();
+    }
+
+    public List<Boat> findAllByUserAndBoatType(User user, BoatType boatType) {
+        return em.createQuery("select b from Boat b where b.owner = :user and c.boatType = :boatType", Boat.class)
+                .setParameter("user", user)
+                .setParameter("boatType", boatType)
                 .getResultList();
     }
 
@@ -130,6 +138,9 @@ public class BoatRepository implements Repository<Boat, Long> {
             return Optional.empty();
         }
     }
+
+
+
 
 
 }

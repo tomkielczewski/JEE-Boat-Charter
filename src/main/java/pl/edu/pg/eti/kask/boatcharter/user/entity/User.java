@@ -74,6 +74,14 @@ public class User implements Serializable {
     private List<Boat> boats;
 
     /**
+     * User's security roles.
+     */
+    @CollectionTable(name = "users_roles", joinColumns = @JoinColumn(name = "user"))
+    @Column(name = "role")
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> roles;
+
+    /**
      * User's avatar. Images in database are stored as blobs (binary large objects).
      */
     @Lob

@@ -10,7 +10,9 @@ import pl.edu.pg.eti.kask.boatcharter.boat.entity.Boat;
 import pl.edu.pg.eti.kask.boatcharter.boat.service.BoatService;
 import pl.edu.pg.eti.kask.boatcharter.boatType.entity.BoatType;
 import pl.edu.pg.eti.kask.boatcharter.boatType.service.BoatTypeService;
+import pl.edu.pg.eti.kask.boatcharter.user.entity.UserRoles;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -22,6 +24,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Path("/boat_types/{boatTypeId}/boats")
+@RolesAllowed(UserRoles.USER)
 public class BoatTypeBoatController {
 
     BoatTypeService boatTypeService;
@@ -43,6 +46,7 @@ public class BoatTypeBoatController {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed(UserRoles.ADMIN)
     public Response getBoats(@PathParam("boatTypeId") Long boatTypeId) {
         Optional<BoatType> boatType = boatTypeService.find(boatTypeId);
         if (boatType.isPresent()) {
@@ -60,6 +64,7 @@ public class BoatTypeBoatController {
     @GET
     @Path("{boatId}")
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed(UserRoles.ADMIN)
     public Response getBoat(@PathParam("boatTypeId") Long boatTypeId, @PathParam("boatId") Long boatId) {
         Optional<BoatType> boatType = boatTypeService.find(boatTypeId);
         Optional<Boat> boat = boatService.find(boatId);
@@ -76,35 +81,36 @@ public class BoatTypeBoatController {
         }
     }
 
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response createBoat(@PathParam("boatTypeId") Long boatTypeId, CreateBoatRequest request){
-        Optional<BoatType> boatType = boatTypeService.find(boatTypeId);
-        if(boatType.isPresent()){
-
-            List<Boat> boats = boatService.findAll();
-            long newBoatId;
-            if (!boats.isEmpty()){
-                newBoatId = Collections.max(boats
-                        .stream()
-                        .map(Boat::getId)
-                        .collect(Collectors.toList())) + 1;
-            }else {
-                newBoatId = 1L;
-            }
-            Boat boat = CreateBoatRequest.dtoToEntityMapper(() -> null).apply(request);
-            boat.setId(newBoatId);
-            boat.setBoatType(boatType.get());
-            boatService.create(boat);
-            return Response.status(Response.Status.CREATED).build();
-        } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
-    }
+//    @POST
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    public Response createBoat(@PathParam("boatTypeId") Long boatTypeId, CreateBoatRequest request){
+//        Optional<BoatType> boatType = boatTypeService.find(boatTypeId);
+//        if(boatType.isPresent()){
+//
+//            List<Boat> boats = boatService.findAll();
+//            long newBoatId;
+//            if (!boats.isEmpty()){
+//                newBoatId = Collections.max(boats
+//                        .stream()
+//                        .map(Boat::getId)
+//                        .collect(Collectors.toList())) + 1;
+//            }else {
+//                newBoatId = 1L;
+//            }
+//            Boat boat = CreateBoatRequest.dtoToEntityMapper(() -> null).apply(request);
+//            boat.setId(newBoatId);
+//            boat.setBoatType(boatType.get());
+//            boatService.create(boat);
+//            return Response.status(Response.Status.CREATED).build();
+//        } else {
+//            return Response.status(Response.Status.NOT_FOUND).build();
+//        }
+//    }
 
     @PUT
     @Path("{boatId}")
     @Consumes(MediaType.APPLICATION_JSON)
+    @RolesAllowed(UserRoles.ADMIN)
     public Response updateBoat(@PathParam("boatTypeId") Long boatTypeId, @PathParam("boatId") Long boatId, UpdateBoatRequest request){
 
         Optional<BoatType> boatType = boatTypeService.find(boatTypeId);
@@ -126,7 +132,9 @@ public class BoatTypeBoatController {
         }
     }
 
+
     @DELETE
+    @RolesAllowed(UserRoles.ADMIN)
     public Response deleteBoats(@PathParam("boatTypeId") Long boatTypeId){
         Optional<BoatType> boatType = boatTypeService.find(boatTypeId);
         if(boatType.isPresent()){
@@ -139,6 +147,7 @@ public class BoatTypeBoatController {
 
     @DELETE
     @Path("{boatId}")
+    @RolesAllowed(UserRoles.ADMIN)
     public Response deleteBoat(@PathParam("boatTypeId") Long boatTypeId, @PathParam("boatId") Long boatId){
         Optional<BoatType> boatType = boatTypeService.find(boatTypeId);
         Optional<Boat> boat = boatService.find(boatId);

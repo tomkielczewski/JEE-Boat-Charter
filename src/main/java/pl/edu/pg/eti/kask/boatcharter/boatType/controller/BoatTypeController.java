@@ -6,7 +6,9 @@ import pl.edu.pg.eti.kask.boatcharter.boatType.dto.GetBoatTypesResponse;
 import pl.edu.pg.eti.kask.boatcharter.boatType.dto.UpdateBoatTypeRequest;
 import pl.edu.pg.eti.kask.boatcharter.boatType.entity.BoatType;
 import pl.edu.pg.eti.kask.boatcharter.boatType.service.BoatTypeService;
+import pl.edu.pg.eti.kask.boatcharter.user.entity.UserRoles;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -21,6 +23,7 @@ import java.util.stream.Collectors;
  * REST controller for {@link BoatType} entity.
  */
 @Path("/boat_types")
+@RolesAllowed(UserRoles.USER)
 public class BoatTypeController {
 
     /**
@@ -76,6 +79,7 @@ public class BoatTypeController {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
+    @RolesAllowed(UserRoles.ADMIN)
     public Response createBoatType(CreateBoatTypeRequest request) {
 
         List<BoatType> boatTypes = service.findAll();
@@ -97,6 +101,7 @@ public class BoatTypeController {
     @PUT
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
+    @RolesAllowed(UserRoles.ADMIN)
     public Response updateBoatType(@PathParam("id") Long id, UpdateBoatTypeRequest request){
 
         Optional<BoatType> boatType = service.find(id);
@@ -117,6 +122,7 @@ public class BoatTypeController {
 
     @DELETE
     @Path("{id}")
+    @RolesAllowed(UserRoles.ADMIN)
     public Response deleteBoatType(@PathParam("id") Long id){
         Optional<BoatType> boatType = service.find(id);
         if (boatType.isPresent()) {

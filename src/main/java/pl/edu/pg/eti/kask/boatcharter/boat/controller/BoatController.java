@@ -5,7 +5,9 @@ import pl.edu.pg.eti.kask.boatcharter.boat.dto.GetBoatResponse;
 import pl.edu.pg.eti.kask.boatcharter.boat.dto.GetBoatsResponse;
 import pl.edu.pg.eti.kask.boatcharter.boat.entity.Boat;
 import pl.edu.pg.eti.kask.boatcharter.boat.service.BoatService;
+import pl.edu.pg.eti.kask.boatcharter.user.entity.UserRoles;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -18,6 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Path("/boats")
+@RolesAllowed(UserRoles.USER)
 public class BoatController {
 
     BoatService boatService;
@@ -29,6 +32,7 @@ public class BoatController {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed(UserRoles.ADMIN)
     public Response getBoats() {
         List<Boat> boats = boatService.findAll();
         if (boats.isEmpty()) {
@@ -41,6 +45,7 @@ public class BoatController {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed(UserRoles.ADMIN)
     public Response getBoat(@PathParam("id") Long id){
         Optional<Boat> boat = boatService.find(id);
         if(boat.isPresent()){

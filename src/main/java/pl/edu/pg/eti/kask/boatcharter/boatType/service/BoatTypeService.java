@@ -3,6 +3,7 @@ package pl.edu.pg.eti.kask.boatcharter.boatType.service;
 import lombok.NoArgsConstructor;
 import pl.edu.pg.eti.kask.boatcharter.boatType.entity.BoatType;
 import pl.edu.pg.eti.kask.boatcharter.boatType.repository.BoatTypeRepository;
+import pl.edu.pg.eti.kask.boatcharter.user.entity.UserRoles;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.LocalBean;
@@ -19,7 +20,7 @@ import java.util.Optional;
 @Stateless
 @LocalBean
 @NoArgsConstructor
-//@RolesAllowed(UserRoles.USER)
+@RolesAllowed(UserRoles.USER)
 public class BoatTypeService {
 
     /**
@@ -65,10 +66,12 @@ public class BoatTypeService {
      *
      * @param boatType new boatType to be saved
      */
+    @RolesAllowed(UserRoles.ADMIN)
     public void create(BoatType boatType) {
         repository.create(boatType);
     }
 
+    @RolesAllowed(UserRoles.ADMIN)
     public void delete(Long boatTypeId) {
         BoatType boatType = repository.find(boatTypeId).orElseThrow();
         repository.delete(boatType);

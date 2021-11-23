@@ -1,7 +1,6 @@
 package pl.edu.pg.eti.kask.boatcharter.user.repository;
 
 import javax.enterprise.context.Dependent;
-import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;

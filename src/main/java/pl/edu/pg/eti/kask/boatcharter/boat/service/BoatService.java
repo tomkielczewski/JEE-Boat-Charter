@@ -6,12 +6,15 @@ import pl.edu.pg.eti.kask.boatcharter.boatType.entity.BoatType;
 import pl.edu.pg.eti.kask.boatcharter.boat.repository.BoatRepository;
 import pl.edu.pg.eti.kask.boatcharter.boatType.repository.BoatTypeRepository;
 import pl.edu.pg.eti.kask.boatcharter.user.entity.User;
+import pl.edu.pg.eti.kask.boatcharter.user.entity.UserRoles;
+import pl.edu.pg.eti.kask.boatcharter.user.repository.UserRepository;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.security.enterprise.SecurityContext;
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,7 +27,7 @@ import java.util.Optional;
 @Stateless
 @LocalBean
 @NoArgsConstructor
-//@RolesAllowed(UserRoles.USER)
+@RolesAllowed(UserRoles.USER)
 public class BoatService {
 
     /**
@@ -33,13 +36,20 @@ public class BoatService {
     private BoatRepository repository;
 
     private BoatTypeRepository boatTypeRepository;
+
+    private UserRepository userRepository;
+
+    private SecurityContext securityContext;
+
     /**
      * @param repository repository for boat entity
      */
     @Inject
-    public BoatService(BoatRepository repository, BoatTypeRepository boatTypeRepository) {
+    public BoatService(BoatRepository repository, BoatTypeRepository boatTypeRepository, UserRepository userRepository, SecurityContext securityContext) {
         this.repository = repository;
         this.boatTypeRepository = boatTypeRepository;
+        this.userRepository = userRepository;
+        this.securityContext = securityContext;
     }
 
     /**
@@ -84,6 +94,75 @@ public class BoatService {
     public List<Boat> findAll(BoatType boatType) {
         return repository.findAllByType(boatType);
     }
+
+    /**
+     * @param login username
+     * @return container (may be empty if no such user) with list of boats
+     */
+    public Optional<List<Boat>> findAllByUser(String login) {
+        Optional<User> user = userRepository.find(login);
+        if (user.isEmpty()) {
+            return Optional.empty();
+        } else {
+            return Optional.of(repository.findAllByUser(user.get()));
+        }
+    }
+
+    public Optional<List<Boat>> findAllByUserAndBoatType(String login, BoatType boatType) {
+        Optional<User> user = userRepository.find(login);
+        if (user.isEmpty()) {
+            return Optional.empty();
+        }
+        else {
+            return Optional.of(repository.findAllByUserAndBoatType(user.get(), boatType));
+        }
+    }
+
+    /**
+     * @param login username
+     * @param id    boat's id
+     * @return container, may be empty if no such user or no boat with specified user nad id
+     */
+    public Optional<Boat> findByUser(String login, Long id) {
+        Optional<User> user = userRepository.find(login);
+        if (user.isEmpty()) {
+            return Optional.empty();
+        } else {
+            return repository.findByIdAndUser(id, user.get());
+        }
+    }
+
+    /**
+     * @return all available characters of the authenticated user
+     */
+    public Optional<Boat> findForCallerPrincipal(Long id) {
+        return repository.findByIdAndUser(id, userRepository.find(securityContext.getCallerPrincipal().getName()).orElseThrow());
+    }
+
+
+    /**
+     * @return all available boats of the authenticated user
+     */
+    public List<Boat> findAllForCallerPrincipal() {
+        return repository.findAllByUser(userRepository.find(securityContext.getCallerPrincipal().getName()).orElseThrow());
+    }
+
+    public List<Boat> findAllByBoatTypeForCallerPrincipal(BoatType boatType) {
+        return repository.findAllByUserAndBoatType(userRepository.find(securityContext.getCallerPrincipal().getName()).orElseThrow(), boatType);
+    }
+
+    /**
+     * Assigns currently logged user to passed new boat and saves it in data store,
+     *
+     * @param boat new boat to be saved
+     */
+    public void createForCallerPrincipal(Boat boat) {
+        User user = userRepository.find(securityContext.getCallerPrincipal().getName()).orElseThrow();
+        boat.setOwner(user);
+        user.getBoats().add(boat);
+        repository.create(boat);
+    }
+
 
 
     /**

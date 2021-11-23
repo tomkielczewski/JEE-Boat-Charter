@@ -1,5 +1,6 @@
 package pl.edu.pg.eti.kask.boatcharter.user.controller;
 
+import lombok.extern.java.Log;
 import pl.edu.pg.eti.kask.boatcharter.user.dto.CreateUserRequest;
 import pl.edu.pg.eti.kask.boatcharter.user.dto.GetUserResponse;
 import pl.edu.pg.eti.kask.boatcharter.user.dto.GetUsersResponse;
@@ -20,8 +21,9 @@ import java.util.Optional;
 /**
  * REST controller for {@link pl.edu.pg.eti.kask.boatcharter.user.entity.User} entity.
  */
+@Log
 @Path("")
-//@RolesAllowed(UserRoles.USER)
+@RolesAllowed(UserRoles.USER)
 public class UserController {
 
     /**
@@ -75,24 +77,24 @@ public class UserController {
         }
     }
 
-//    /**
-//     * @return response with logged user or empty object
-//     */
-//    @GET
-//    @Path("/user")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Response getUser() {
-//        Optional<User> user = service.findCallerPrincipal();
-//        if (user.isPresent()) {
-//            return Response
-//                    .ok(GetUserResponse.entityToDtoMapper().apply(user.get()))
-//                    .build();
-//        } else {
-//            return Response
-//                    .ok(new Object())
-//                    .build();
-//        }
-//    }
+    /**
+     * @return response with logged user or empty object
+     */
+    @GET
+    @Path("/user")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getUser() {
+        Optional<User> user = service.findCallerPrincipal();
+        if (user.isPresent()) {
+            return Response
+                    .ok(GetUserResponse.entityToDtoMapper().apply(user.get()))
+                    .build();
+        } else {
+            return Response
+                    .ok(new Object())
+                    .build();
+        }
+    }
 
     /**
      * Removes selected user.
@@ -101,7 +103,7 @@ public class UserController {
      */
     @Path("/users/{login}")
     @DELETE
-//    @RolesAllowed(UserRoles.ADMIN)
+    @RolesAllowed(UserRoles.ADMIN)
     public Response deleteUser(@PathParam("login") String login) {
         Optional<User> user = service.find(login);
         if (user.isPresent()) {
