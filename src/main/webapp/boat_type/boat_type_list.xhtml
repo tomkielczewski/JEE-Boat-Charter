@@ -6,8 +6,8 @@
                 template="/WEB-INF/template/main.xhtml">
 
     <ui:define name="content">
-<!--        <h:panelGroup rendered="#{userContext.authorized}" layout="block">-->
-        <h:panelGroup layout="block">
+        <h:panelGroup rendered="#{facesContext.externalContext.userPrincipal != null}" layout="block">
+<!--        <h:panelGroup layout="block">-->
             <article class="text--justified">
                 <header><h2>BoatTypes</h2></header>
                 <h:dataTable value="#{boatTypeList.boatTypes.boatTypes}" var="boatType" styleClass="data-table">
@@ -27,9 +27,11 @@
 <!--                            <f:param name="id" value="#{boatType.id}"/>-->
 <!--                        </h:link>-->
 <!--                    </h:column>-->
-                    <h:column>
+<!--                    securityContext.getCallerPrincipal().getRole()-->
+<!--                    <h:column rendered="#{facesContext.externalContext.userPrincipal.user_roles != null}" >-->
+                    <h:column rendered="#{facesContext.externalContext.isUserInRole('admin')}">
                         <f:facet name="header">delete</f:facet>
-                        <h:form>
+                        <h:form >
                             <h:commandButton styleClass="ui-button ui-control" value="delete"
                                              action="#{boatTypeList.deleteAction(boatType)}"/>
                         </h:form>

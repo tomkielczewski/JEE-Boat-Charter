@@ -6,6 +6,7 @@ import pl.edu.pg.eti.kask.boatcharter.boat.entity.Boat;
 import pl.edu.pg.eti.kask.boatcharter.boat.model.BoatModel;
 import pl.edu.pg.eti.kask.boatcharter.boat.service.BoatService;
 
+import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -22,7 +23,7 @@ public class BoatView implements Serializable {
     /**
      * Service for managing boats.
      */
-    private final BoatService service;
+    private BoatService service;
 
     /**
      * Boat id.
@@ -37,10 +38,14 @@ public class BoatView implements Serializable {
     @Getter
     private BoatModel boat;
 
-    @Inject
-    public BoatView(BoatService service ) {
+    public BoatView() {
+    }
+
+    @EJB
+    public void setService(BoatService service) {
         this.service = service;
     }
+
 
     public void init() throws IOException {
         Optional<Boat> boat = service.find(id);

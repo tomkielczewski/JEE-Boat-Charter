@@ -27,17 +27,12 @@
                         <h:graphicImage alt="/index.xhtml" style="width: 30%; height: 50px; margin-top: 10px; margin-left: 10px" value="#{resource['images:logo.png']}"/>
                     </div>
                     <h1 style="display: inline-block;" >Boat Charter</h1>
-<!--                    <h:form rendered="#{!userContext.authorized}">-->
-<!--                        <h:outputLabel value="Login:" for="login"/>-->
-<!--                        <h:inputText id="login" class="ui-control ui-input" value="#{userLogin.login}"/>-->
-<!--                        <h:outputLabel value="Password:" for="password"/>-->
-<!--                        <h:inputSecret id="password" class="ui-control ui-input" value="#{userLogin.password}"/>-->
-<!--                        <h:commandButton class="ui-control ui-button" type="submit" value="Login" action="#{userLogin.loginAction()}"/>-->
-<!--                    </h:form>-->
-<!--                    <h:form rendered="#{userContext.authorized}">-->
-<!--                        Logged as: <h:outputText value="#{userContext.principal}"/>-->
-<!--                        <h:commandButton class="ui-control ui-button" value="Logout" action="#{userLogout.logoutAction()}"/>-->
-<!--                    </h:form>-->
+                    <div style="display: inline-block; width: 100%; text-align: right;">
+                        <h:form rendered="#{facesContext.externalContext.userPrincipal != null}">
+                            Logged as: <h:outputText value="#{facesContext.externalContext.userPrincipal.name}"/>
+                            <h:commandButton class="ui-control ui-button" value="Logout" action="#{userLogout.logoutAction()}"/>
+                        </h:form>
+                    </div>
                 </header>
 
                 <nav class="navigation-bar">

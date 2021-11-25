@@ -4,7 +4,9 @@ import pl.edu.pg.eti.kask.boatcharter.boatType.model.BoatTypesModel;
 import pl.edu.pg.eti.kask.boatcharter.boat.service.BoatService;
 import pl.edu.pg.eti.kask.boatcharter.boatType.service.BoatTypeService;
 
+import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -19,20 +21,29 @@ public class BoatTypeList implements Serializable {
     /**
      * Service for managing boatTypes.
      */
-    private final BoatTypeService service;
+    private BoatTypeService service;
 
-    private final BoatService boatService;
+    private BoatService boatService;
 
     /**
      * BoatTypes list exposed to the view.
      */
     private BoatTypesModel boatTypes;
 
-    @Inject
-    public BoatTypeList(BoatTypeService service, BoatService boatService) {
+    public BoatTypeList() {
+
+    }
+
+    @EJB
+    public void setBoatTypeService(BoatTypeService service) {
         this.service = service;
+    }
+
+    @EJB
+    public void setBoatService(BoatService boatService) {
         this.boatService = boatService;
     }
+
 
     /**
      * In order to prevent calling service on different steps of JSF request lifecycle, model property is cached using

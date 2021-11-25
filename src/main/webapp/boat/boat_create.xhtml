@@ -12,7 +12,7 @@
 
     <ui:define name="content">
         <h:outputStylesheet library="boat" name="css/boat_create.css"/><!-- Automatically relocated to head. -->
-        <h:panelGroup layout="block">
+        <h:panelGroup rendered="#{facesContext.externalContext.userPrincipal != null}" layout="block">
             <article class="text--justified">
                 <header><h2>Create boat</h2></header>
                 <h:form class="boat__form">

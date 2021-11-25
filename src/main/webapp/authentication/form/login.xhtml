@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/WEB-INF/template/main.xhtml">
+
+    <ui:define name="content">
+        <article class="text--justified">
+            <header><h2>Login</h2></header>
+            <section>
+                <form action="j_security_check" method="post">
+                    <label for="username">Login:</label>
+                    <input class="ui-control ui-input" id="username" name="j_username" type="text"/>
+                    <label for="username">Password:</label>
+                    <input class="ui-control ui-input" id="passsword" name="j_password" type="password"/>
+                    <input class="ui-control ui-button" type="submit"/>
+                </form>
+            </section>
+        </article>
+    </ui:define>
+
+</ui:composition>

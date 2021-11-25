@@ -2,6 +2,7 @@ package pl.edu.pg.eti.kask.boatcharter.boat.service;
 
 import lombok.NoArgsConstructor;
 import pl.edu.pg.eti.kask.boatcharter.boat.entity.Boat;
+import pl.edu.pg.eti.kask.boatcharter.boat.model.BoatsModel;
 import pl.edu.pg.eti.kask.boatcharter.boatType.entity.BoatType;
 import pl.edu.pg.eti.kask.boatcharter.boat.repository.BoatRepository;
 import pl.edu.pg.eti.kask.boatcharter.boatType.repository.BoatTypeRepository;
@@ -58,15 +59,27 @@ public class BoatService {
      * @param id boat's id
      * @return container with boat
      */
+//    public Optional<Boat> find(Long id) {
+//        return repository.find(id);
+//    }
+
     public Optional<Boat> find(Long id) {
-        return repository.find(id);
+        Optional<Boat> boat = null;
+        if (securityContext.isCallerInRole(UserRoles.ADMIN)) {
+            boat = repository.find(id);
+        }
+        else if (securityContext.isCallerInRole(UserRoles.USER)) {
+            boat = this.findForCallerPrincipal(id);
+        }
+        return boat;
     }
 
-    /**
-     * @param id   boat's id
-     * @param user existing user
-     * @return selected boat for user
-     */
+
+        /**
+         * @param id   boat's id
+         * @param user existing user
+         * @return selected boat for user
+         */
     public Optional<Boat> find(User user, Long id) {
         return repository.findByIdAndUser(id, user);
     }
@@ -133,22 +146,33 @@ public class BoatService {
     }
 
     /**
-     * @return all available characters of the authenticated user
+     * @return all available boats of the authenticated user
      */
     public Optional<Boat> findForCallerPrincipal(Long id) {
         return repository.findByIdAndUser(id, userRepository.find(securityContext.getCallerPrincipal().getName()).orElseThrow());
     }
 
 
-    /**
+    /**tName()).orElseThrow(), boatType);
+//    }
      * @return all available boats of the authenticated user
      */
     public List<Boat> findAllForCallerPrincipal() {
         return repository.findAllByUser(userRepository.find(securityContext.getCallerPrincipal().getName()).orElseThrow());
     }
 
+//    public List<Boat> findAllByBoatTypeForCallerPrincipal(BoatType boatType) {
+//        return repository.findAllByUserAndBoatType(userRepository.find(securityContext.getCallerPrincipal().ge
+
     public List<Boat> findAllByBoatTypeForCallerPrincipal(BoatType boatType) {
-        return repository.findAllByUserAndBoatType(userRepository.find(securityContext.getCallerPrincipal().getName()).orElseThrow(), boatType);
+        List<Boat> boat = null;
+        if (securityContext.isCallerInRole(UserRoles.ADMIN)){
+            boat =  repository.findAllByType(boatType);
+        }
+        else {
+            boat =  repository.findAllByUserAndBoatType(userRepository.find(securityContext.getCallerPrincipal().getName()).orElseThrow(), boatType);
+        };
+        return boat;
     }
 
     /**

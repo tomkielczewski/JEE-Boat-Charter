@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/WEB-INF/template/main.xhtml">
+
+    <ui:define name="content">
+        <article class="text--justified">
+            <header><h2>Login</h2></header>
+            <section>
+                <h:form rendered="#{facesContext.externalContext.userPrincipal == null}">
+                    <h:outputLabel value="Login:" for="login"/>
+                    <h:inputText id="login" class="ui-control ui-input" value="#{userLogin.login}"/>
+                    <h:outputLabel value="Password:" for="password"/>
+                    <h:inputSecret id="password" class="ui-control ui-input" value="#{userLogin.password}"/>
+                    <h:commandButton class="ui-control ui-button" type="submit" value="Login" action="#{userLogin.loginAction()}"/>
+                </h:form>
+            </section>
+        </article>
+    </ui:define>
+
+</ui:composition>

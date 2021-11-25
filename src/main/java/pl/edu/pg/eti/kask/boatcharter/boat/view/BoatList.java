@@ -7,17 +7,19 @@ import pl.edu.pg.eti.kask.boatcharter.boat.model.BoatsModel;
 import pl.edu.pg.eti.kask.boatcharter.boat.service.BoatService;
 import pl.edu.pg.eti.kask.boatcharter.boatType.service.BoatTypeService;
 
+import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.security.enterprise.SecurityContext;
 import java.io.Serializable;
 import java.util.Optional;
 
 /**
  * View bean for rendering list of boats.
  */
-@ViewScoped
+@RequestScoped
 @Named
 public class BoatList implements Serializable {
 
@@ -28,21 +30,30 @@ public class BoatList implements Serializable {
     /**
      * Service for managing boats.
      */
-    private final BoatService boatService;
+    private BoatService boatService;
 
     /**
      * Service for managing boatTypes.
      */
-    private final BoatTypeService boatTypeService;
+    private BoatTypeService boatTypeService;
+
 
     /**
      * Boats list exposed to the view.
      */
     private BoatsModel boats;
 
-    @Inject
-    public BoatList(BoatService boatService, BoatTypeService boatTypeService) {
+    public BoatList() {
+
+    }
+
+    @EJB
+    public void setBoatService(BoatService boatService) {
         this.boatService = boatService;
+    }
+
+    @EJB
+    public void setBoatTypeService(BoatTypeService boatTypeService) {
         this.boatTypeService = boatTypeService;
     }
 
@@ -57,10 +68,12 @@ public class BoatList implements Serializable {
             Optional<BoatType> boatType = boatTypeService.find(this.boatTypeId);
             boatType.ifPresent(value ->
                     boats = BoatsModel.entityToModelMapper()
-                            .apply(boatService.findAll(value)));
+                            .apply(boatService.findAllByBoatTypeForCallerPrincipal(value)));
         }
         return boats;
     }
+
+
 
     /**
      * Action for clicking delete action.
