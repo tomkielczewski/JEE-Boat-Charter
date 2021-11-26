@@ -20,25 +20,25 @@
 <!--                        <h3>Nr: </h3><h:outputText value="#{boatView.boat.id}"/>-->
 <!--                    </div>-->
                     <div>
-                        <h3>Boat Type: </h3><h:outputText value="#{boatView.boat.boatType}"/>
+                        <h3>#{messages['view.boatType']}: </h3><h:outputText value="#{boatView.boat.boatType}"/>
                     </div>
                     <div>
-                        <h3>Owner: </h3>
+                        <h3>#{messages['view.owner']}: </h3>
                         <h:outputText value="#{boatView.boat.owner.name} "/>
                         <h:outputText value="#{boatView.boat.owner.surname}"/>
                     </div>
                     <div>
-                        <h3>Details: </h3>
+                        <h3>#{messages['view.details']}: </h3>
                         <ul>
-                            <li>Number of sails: <h:outputText value="#{boatView.boat.numOfSails}"/></li>
-                            <li>Engine: <h:outputText value="#{boatView.boat.engine}"/> Hp</li>
-                            <li>Fuel tank capacity: <h:outputText value="#{boatView.boat.fuel}"/> l</li>
-                            <li>Water tank capacity: <h:outputText value="#{boatView.boat.water}"/> l</li>
-                            <li>Year: <h:outputText value="#{boatView.boat.year}"/></li>
-                            <li>Max number of people on board: <h:outputText value="#{boatView.boat.people}"/></li>
-                            <li>Beam: <h:outputText value="#{boatView.boat.beam}"/> m</li>
-                            <li>Length: <h:outputText value="#{boatView.boat.length}"/> m</li>
-                            <li>Draught: <h:outputText value="#{boatView.boat.draught}"/> m</li>
+                            <li>#{messages['form.numOfSails']}: <h:outputText value="#{boatView.boat.numOfSails}"/></li>
+                            <li>#{messages['form.engine']}: <h:outputText value="#{boatView.boat.engine}"/> Hp</li>
+                            <li>#{messages['form.fuel']}: <h:outputText value="#{boatView.boat.fuel}"/> l</li>
+                            <li>#{messages['form.water']}: <h:outputText value="#{boatView.boat.water}"/> l</li>
+                            <li>#{messages['form.year']}: <h:outputText value="#{boatView.boat.year}"/></li>
+                            <li>#{messages['form.people']}: <h:outputText value="#{boatView.boat.people}"/></li>
+                            <li>#{messages['form.beam']}: <h:outputText value="#{boatView.boat.beam}"/> m</li>
+                            <li>#{messages['form.length']}: <h:outputText value="#{boatView.boat.length}"/> m</li>
+                            <li>#{messages['form.draught']}: <h:outputText value="#{boatView.boat.draught}"/> m</li>
                         </ul>
                     </div>
                     <br/>
@@ -46,8 +46,8 @@
 <!--                        <h:graphicImage value="#{boatView.boat.picture}"/>-->
 <!--                    </div>-->
                     <div>
-                        <f:facet name="header">Edit</f:facet>
-                        <h:link styleClass="ui-button ui-control" outcome="/boat/boat_edit.xhtml" value="edit">
+                        <header><h4>#{messages.editheader}</h4></header>
+                        <h:link styleClass="ui-button ui-control" outcome="/boat/boat_edit.xhtml" value="#{messages.edit}">
                             <f:param name="id" value="#{boatView.boat.id}"/>
                         </h:link>
                     </div>

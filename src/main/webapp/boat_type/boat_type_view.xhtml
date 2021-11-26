@@ -23,31 +23,31 @@
                     <h:outputText value="#{boat.id}"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">Name</f:facet>
+                    <f:facet name="header">#{messages.name}</f:facet>
                     <h:outputText value="#{boat.name}"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">View</f:facet>
-                    <h:link styleClass="ui-button ui-control" outcome="/boat/boat_view.xhtml" value="view">
+                    <f:facet name="header">#{messages.view}</f:facet>
+                    <h:link styleClass="ui-button ui-control" outcome="/boat/boat_view.xhtml" value="#{messages.view}">
                         <f:param name="id" value="#{boat.id}"/>
                     </h:link>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">edit</f:facet>
-                    <h:link styleClass="ui-button ui-control" outcome="/boat/boat_edit.xhtml" value="edit">
+                    <f:facet name="header">#{messages.edit}</f:facet>
+                    <h:link styleClass="ui-button ui-control" outcome="/boat/boat_edit.xhtml" value="#{messages.edit}">
                         <f:param name="id" value="#{boat.id}"/>
                     </h:link>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">Delete</f:facet>
+                    <f:facet name="header">#{messages.delete}</f:facet>
                     <h:form>
-                        <h:commandButton styleClass="ui-button ui-control" value="delete" action="#{boatList.deleteAction(boat)}" />
+                        <h:commandButton styleClass="ui-button ui-control" value="#{messages.delete}" action="#{boatList.deleteAction(boat)}" />
                     </h:form>
                 </h:column>
             </h:dataTable>
             <div>
-                <f:facet name="header">Create new boat</f:facet>
-                <h:link styleClass="ui-button ui-control" outcome="/boat/boat_create.xhtml" value="new">
+                <header><h4>#{messages.createheader}</h4></header>
+                <h:link styleClass="ui-button ui-control" outcome="/boat/boat_create.xhtml" value="#{messages.create}">
                     <f:param name="id" value="#{boatTypeView.id}"/>
                 </h:link>
             </div>

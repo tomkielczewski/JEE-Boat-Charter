@@ -5,14 +5,25 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 template="/WEB-INF/template/main.xhtml">
 
+
     <ui:define name="content">
+        <f:loadBundle var="msg" basename="pl.edu.pg.eti.kask.boatcharter.about.i18n.msg"/>
         <article class="text--justified">
-            <header><h2>About project</h2></header>
+            <header><h2>#{msg.aboutProjectHeader}</h2></header>
             <section>
-                <p>The <span class="text--italic text--bold">Boat Charter</span> is an educational project with
-                    yachts catalog.</p>
-        </section>
+                <h:outputText value="#{msg.aboutProject}" escape="false"/>
+            </section>
         </article>
     </ui:define>
+
+<!--    <ui:define name="content">-->
+<!--        <article class="text&#45;&#45;justified">-->
+<!--            <header><h2>About project</h2></header>-->
+<!--            <section>-->
+<!--                <p>The <span class="text&#45;&#45;italic text&#45;&#45;bold">Boat Charter</span> is an educational project with-->
+<!--                    yachts catalog.</p>-->
+<!--        </section>-->
+<!--        </article>-->
+<!--    </ui:define>-->
 
 </ui:composition>

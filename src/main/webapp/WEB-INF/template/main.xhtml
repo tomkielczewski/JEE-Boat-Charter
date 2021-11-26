@@ -14,38 +14,48 @@
             <title>Boat Charter</title>
 
             <h:outputStylesheet library="default" name="css/styles.css"/>
+            <h:outputScript library="push" name="js/message.js" target="head"/>
         </h:head>
         <h:body>
+
+<!--            <f:websocket channel="broadcastChannel" scope="application" onmessage="receive"/>-->
+            <f:websocket rendered="#{facesContext.externalContext.userPrincipal != null}" channel="userChannel"
+                         user="#{facesContext.externalContext.userPrincipal.name}" onmessage="receive"/>
+
             <div class="container">
                 <header class="header">
-<!--                    <div style="display: inline-block; width: 470px; text-align: left;">-->
-<!--                        <h:graphicImage style="width: 50px; height: 50px; margin: 10px;" value="#{resource['images:background.jpg']}"/>-->
-<!--                    </div>-->
-<!--                    <div style="display: inline-block; height: 20px; width: 500px; text-align: left;"><h1>Windsurf equipment rental</h1></div>-->
-
                     <div style="display: inline-block; width: 470px; text-align: left;">
                         <h:graphicImage alt="/index.xhtml" style="width: 30%; height: 50px; margin-top: 10px; margin-left: 10px" value="#{resource['images:logo.png']}"/>
                     </div>
                     <h1 style="display: inline-block;" >Boat Charter</h1>
                     <div style="display: inline-block; width: 100%; text-align: right;">
+                        <div style="display: inline-block; width: 20px; text-align: right;">
+                            <h:graphicImage styleClass="language__flag" library="default" name="img/flag.svg"/>
+                        </div>
                         <h:form rendered="#{facesContext.externalContext.userPrincipal != null}">
-                            Logged as: <h:outputText value="#{facesContext.externalContext.userPrincipal.name}"/>
-                            <h:commandButton class="ui-control ui-button" value="Logout" action="#{userLogout.logoutAction()}"/>
+                            #{messages.loggedAs}: <h:outputText value="#{facesContext.externalContext.userPrincipal.name}"/>
+                            <h:commandButton class="ui-control ui-button" value="#{messages.logout}"
+                                             action="#{userLogout.logoutAction()}"/>
                         </h:form>
                     </div>
                 </header>
 
                 <nav class="navigation-bar">
                     <ul>
-                        <li><h:link outcome="/index.xhtml">Main</h:link></li>
-                        <li><h:link outcome="/about/about.xhtml">About</h:link></li>
-                        <li><h:link outcome="/boat_type/boat_type_list.xhtml">Boat Types</h:link></li>
+                        <li><h:link outcome="/index.xhtml">#{messages['nav.main']}</h:link></li>
+                        <li><h:link outcome="/about/about.xhtml">#{messages['nav.about']}</h:link></li>
+                        <li><h:link outcome="/boat_type/boat_type_list.xhtml">#{messages['nav.boatTypes']}</h:link></li>
                     </ul>
                 </nav>
 
                 <section class="main-section">
                     <ui:insert name="content"/>
                 </section>
+
+<!--                <section class="message-section">-->
+<!--                    <header><h2>#{messages.messages}</h2></header>-->
+<!--                    <textarea class="ui-control" id="messageContainer" readonly="readonly"/>-->
+<!--                </section>-->
 
                 <footer class="footer">
                     <p>Copyright 2021, Tomasz Kiełczewski</p>

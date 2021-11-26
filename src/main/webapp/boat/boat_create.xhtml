@@ -14,40 +14,40 @@
         <h:outputStylesheet library="boat" name="css/boat_create.css"/><!-- Automatically relocated to head. -->
         <h:panelGroup rendered="#{facesContext.externalContext.userPrincipal != null}" layout="block">
             <article class="text--justified">
-                <header><h2>Create boat</h2></header>
+                <header><h2>#{messages.createheader}</h2></header>
                 <h:form class="boat__form">
 
-                    <h:outputLabel for="name" value="Name:"/>
+                    <h:outputLabel for="name" value="#{messages['form.name']}:"/>
                     <h:inputText class="ui-control ui-input" id="name" value="#{boatCreate.boat.name}"/>
 
-                    <h:outputLabel for="numOfSails" value="Number of sails:"/>
+                    <h:outputLabel for="numOfSails" value="#{messages['form.numOfSails']}:"/>
                     <h:inputText class="ui-control ui-input" id="numOfSails" value="#{boatCreate.boat.numOfSails}"/>
 
-                    <h:outputLabel for="year" value="Year:"/>
+                    <h:outputLabel for="year" value="#{messages['form.year']}:"/>
                     <h:inputText class="ui-control ui-input" id="year" value="#{boatCreate.boat.year}"/>
 
-                    <h:outputLabel for="engine" value="Engine:"/>
+                    <h:outputLabel for="engine" value="#{messages['form.engine']}:"/>
                     <h:inputTextarea class="ui-control ui-input" id="engine" value="#{boatCreate.boat.engine}"/>
 
-                    <h:outputLabel for="people" value="Max number of people on board:"/>
+                    <h:outputLabel for="people" value="#{messages['form.people']}:"/>
                     <h:inputTextarea class="ui-control ui-input" id="people" value="#{boatCreate.boat.people}"/>
 
-                    <h:outputLabel for="fuel" value="Fuel tank capacity:"/>
+                    <h:outputLabel for="fuel" value="#{messages['form.fuel']}:"/>
                     <h:inputText class="ui-control ui-input" id="fuel" value="#{boatCreate.boat.fuel}"/>
 
-                    <h:outputLabel for="water" value="Water tank capacity:"/>
+                    <h:outputLabel for="water" value="#{messages['form.water']}:"/>
                     <h:inputText class="ui-control ui-input" id="water" value="#{boatCreate.boat.water}"/>
 
-                    <h:outputLabel for="beam" value="Beam:"/>
+                    <h:outputLabel for="beam" value="#{messages['form.beam']}:"/>
                     <h:inputText class="ui-control ui-input" id="beam" value="#{boatCreate.boat.beam}"/>
 
-                    <h:outputLabel for="length" value="Length:"/>
+                    <h:outputLabel for="length" value="#{messages['form.length']}:"/>
                     <h:inputText class="ui-control ui-input" id="length" value="#{boatCreate.boat.length}"/>
 
-                    <h:outputLabel for="draught" value="Draught:"/>
+                    <h:outputLabel for="draught" value="#{messages['form.draught']}:"/>
                     <h:inputText class="ui-control ui-input" id="draught" value="#{boatCreate.boat.draught}"/>
 
-                    <h:commandButton class="ui-control ui-button" value="Create"
+                    <h:commandButton class="ui-control ui-button" value="#{messages.create}"
                                      action="#{boatCreate.saveAction()}"/>
 
                 </h:form>
