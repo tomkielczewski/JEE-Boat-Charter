@@ -10,37 +10,33 @@
 <!--        <h:panelGroup layout="block">-->
             <article class="text--justified">
                 <header><h2>#{messages.boatTypes}</h2></header>
-                <h:dataTable value="#{boatTypeList.boatTypes.boatTypes}" var="boatType" styleClass="data-table">
-                    <h:column>
-                        <f:facet name="header">#{messages.name}</f:facet>
-                        <h:outputText value="#{boatType.name}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">#{messages.view}</f:facet>
-                        <h:link outcome="/boat_type/boat_type_view.xhtml" value="#{messages.view}">
-                            <f:param name="id" value="#{boatType.id}"/>
-                        </h:link>
-                    </h:column>
-<!--                    <h:column>-->
-<!--                        <f:facet name="header">edit</f:facet>-->
-<!--                        <h:link outcome="/boatType/boatType_edit.xhtml" value="edit">-->
-<!--                            <f:param name="id" value="#{boatType.id}"/>-->
-<!--                        </h:link>-->
-<!--                    </h:column>-->
-<!--                    securityContext.getCallerPrincipal().getRole()-->
-<!--                    <h:column rendered="#{facesContext.externalContext.userPrincipal.user_roles != null}" >-->
-                    <h:column rendered="#{facesContext.externalContext.isUserInRole('admin')}">
-                        <f:facet name="header">#{messages.delete}</f:facet>
-                        <h:form>
+                <h:form id="boatTypeForm">
+                    <h:dataTable id="boatTypeTable" value="#{boatTypeList.boatTypes.boatTypes}" var="boatType" styleClass="data-table">
+                        <h:column>
+                            <f:facet name="header">#{messages.name}</f:facet>
+                            <h:outputText value="#{boatType.name}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">#{messages.view}</f:facet>
+                            <h:link outcome="/boat_type/boat_type_view.xhtml" value="#{messages.view}">
+                                <f:param name="id" value="#{boatType.id}"/>
+                            </h:link>
+                        </h:column>
+
+                        <h:column rendered="#{facesContext.externalContext.isUserInRole('admin')}">
+                            <f:facet name="header">#{messages.delete}</f:facet>
+<!--                            <h:form>-->
+<!--                            <h:commandButton styleClass="ui-button ui-control" value="#{messages.delete}"-->
+<!--                                             action="#{boatTypeList.deleteAction(boatType)}"/>-->
                             <h:commandButton styleClass="ui-button ui-control" value="#{messages.delete}"
-                                             action="#{boatTypeList.deleteAction(boatType)}"/>
-                        </h:form>
-                    </h:column>
-<!--                    <f:facet name="footer">-->
-<!--                        <h:button styleClass="ui-button ui-control" outcome="/boatType/boatType_create__basic.xhtml"-->
-<!--                                  value="Create new boatType"/>-->
-<!--                    </f:facet>-->
-                </h:dataTable>
+                                             actionListener="#{boatTypeList.deleteAction(boatType)}">
+                                <f:ajax execute="@this" render=":boatTypeForm:boatTypeTable"/>
+                            </h:commandButton>
+<!--                            </h:form>-->
+                        </h:column>
+
+                    </h:dataTable>
+                </h:form>
             </article>
         </h:panelGroup>
     </ui:define>

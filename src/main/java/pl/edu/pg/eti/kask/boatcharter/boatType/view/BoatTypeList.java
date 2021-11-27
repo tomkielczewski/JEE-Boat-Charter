@@ -64,9 +64,10 @@ public class BoatTypeList implements Serializable {
      * @param boatType boatType to be removed
      * @return navigation case to list_boatTypes
      */
-    public String deleteAction(BoatTypesModel.BoatType boatType) {
+    public void deleteAction(BoatTypesModel.BoatType boatType) {
         service.delete(boatType.getId());
-        return "boat_type_list?faces-redirect=true";
+        boatTypes = null;
+//        return "boat_type_list?faces-redirect=true";
     }
 
 }

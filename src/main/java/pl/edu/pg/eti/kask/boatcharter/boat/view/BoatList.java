@@ -19,7 +19,7 @@ import java.util.Optional;
 /**
  * View bean for rendering list of boats.
  */
-@RequestScoped
+@ViewScoped
 @Named
 public class BoatList implements Serializable {
 
@@ -66,7 +66,7 @@ public class BoatList implements Serializable {
     public BoatsModel getBoats() {
         if (boats == null) {
             Optional<BoatType> boatType = boatTypeService.find(this.boatTypeId);
-            boatType.ifPresent(value ->
+             boatType.ifPresent(value ->
                     boats = BoatsModel.entityToModelMapper()
                             .apply(boatService.findAllByBoatTypeForCallerPrincipal(value)));
         }
@@ -81,11 +81,13 @@ public class BoatList implements Serializable {
      * @param boat boat to be removed
      * @return navigation case to list_boats
      */
-    public String deleteAction(BoatsModel.Boat boat) {
+//    public String deleteAction(BoatsModel.Boat boat) {
+//        boatService.delete(boat.getId());
+//        return "boat_type_view?id=" + this.boatTypeId + "&faces-redirect=true";
+//    }
+    public void deleteAction(BoatsModel.Boat boat) {
         boatService.delete(boat.getId());
-        return "boat_type_view?id=" + this.boatTypeId + "&faces-redirect=true";
-//        return "boat_type/boat_type_view?id=2&faces-redirect=true";
-
+        boats = null;
     }
 
 

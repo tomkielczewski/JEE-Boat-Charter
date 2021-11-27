@@ -17,34 +17,43 @@
             <article class="text--justified">
                 <header><h2><h:outputText value="#{boatTypeView.boatType.name}"/></h2></header>
             </article>
-            <h:dataTable value="#{boatList.boats.boats}" var="boat" styleClass="data-table">
-                <h:column>
-                    <f:facet name="header">Nr</f:facet>
-                    <h:outputText value="#{boat.id}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">#{messages.name}</f:facet>
-                    <h:outputText value="#{boat.name}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">#{messages.view}</f:facet>
-                    <h:link styleClass="ui-button ui-control" outcome="/boat/boat_view.xhtml" value="#{messages.view}">
-                        <f:param name="id" value="#{boat.id}"/>
-                    </h:link>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">#{messages.edit}</f:facet>
-                    <h:link styleClass="ui-button ui-control" outcome="/boat/boat_edit.xhtml" value="#{messages.edit}">
-                        <f:param name="id" value="#{boat.id}"/>
-                    </h:link>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">#{messages.delete}</f:facet>
-                    <h:form>
-                        <h:commandButton styleClass="ui-button ui-control" value="#{messages.delete}" action="#{boatList.deleteAction(boat)}" />
-                    </h:form>
-                </h:column>
-            </h:dataTable>
+            <h:form id="boatForm">
+                <h:dataTable id="boatTable" value="#{boatList.boats.boats}" var="boat" styleClass="data-table">
+                    <h:column>
+                        <f:facet name="header">Nr</f:facet>
+                        <h:outputText value="#{boat.id}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">#{messages.name}</f:facet>
+                        <h:outputText value="#{boat.name}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">#{messages.view}</f:facet>
+                        <h:link styleClass="ui-button ui-control" outcome="/boat/boat_view.xhtml" value="#{messages.view}">
+                            <f:param name="id" value="#{boat.id}"/>
+                        </h:link>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">#{messages.edit}</f:facet>
+                        <h:link styleClass="ui-button ui-control" outcome="/boat/boat_edit.xhtml" value="#{messages.edit}">
+                            <f:param name="id" value="#{boat.id}"/>
+                        </h:link>
+                    </h:column>
+<!--                    <h:column>-->
+<!--                        <f:facet name="header">#{messages.delete}</f:facet>-->
+<!--                            <h:commandButton styleClass="ui-button ui-control" value="#{messages.delete}" action="#{boatList.deleteAction(boat)}" />-->
+<!--                    </h:column>-->
+                    <h:column>
+                        <f:facet name="header">#{messages.delete}</f:facet>
+                        <h:commandButton styleClass="ui-button ui-control" value="#{messages.delete}"
+                                         actionListener="#{boatList.deleteAction(boat)}">
+<!--                            <f:ajax execute="@this" render=":boatForm:boatTable"/>-->
+                            <f:ajax execute="boatTable" render=":boatForm:boatTable"/>
+
+                        </h:commandButton>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
             <div>
                 <header><h4>#{messages.createheader}</h4></header>
                 <h:link styleClass="ui-button ui-control" outcome="/boat/boat_create.xhtml" value="#{messages.create}">

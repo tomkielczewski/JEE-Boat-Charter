@@ -13,6 +13,7 @@
         <feature>ejb-3.2</feature>
         <feature>appSecurity-3.0</feature>
         <feature>passwordUtilities-1.0</feature>
+        <feature>websocket-1.1</feature>
     </featureManager>
 
     <dataSource id="BoatCharterDataSource" jndiName="jdbc/BoatCharter">

@@ -7,14 +7,14 @@
 
     <ui:define name="content">
         <article class="text--justified">
-            <header><h2>Login</h2></header>
+            <header><h2>#{messages.login}</h2></header>
             <section>
                 <form action="j_security_check" method="post">
                     <label for="username">Login:</label>
                     <input class="ui-control ui-input" id="username" name="j_username" type="text"/>
-                    <label for="username">Password:</label>
+                    <label for="username">#{messages.password}:</label>
                     <input class="ui-control ui-input" id="passsword" name="j_password" type="password"/>
-                    <input class="ui-control ui-button" type="submit"/>
+                    <input class="ui-control ui-button" type="submit" value="#{messages.login}"/>
                 </form>
             </section>
         </article>

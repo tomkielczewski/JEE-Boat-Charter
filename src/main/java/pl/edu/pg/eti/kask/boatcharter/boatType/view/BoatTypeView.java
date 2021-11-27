@@ -6,6 +6,8 @@ import pl.edu.pg.eti.kask.boatcharter.boatType.entity.BoatType;
 import pl.edu.pg.eti.kask.boatcharter.boatType.model.BoatTypeModel;
 import pl.edu.pg.eti.kask.boatcharter.boatType.service.BoatTypeService;
 
+import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -19,7 +21,7 @@ import java.util.Optional;
 @Named
 public class BoatTypeView implements Serializable {
 
-    private final BoatTypeService service;
+    private BoatTypeService service;
 
     @Setter
     @Getter
@@ -28,10 +30,15 @@ public class BoatTypeView implements Serializable {
     @Getter
     private BoatTypeModel boatType;
 
-    @Inject
-    public BoatTypeView(BoatTypeService service) {
+    public BoatTypeView() {
+
+    }
+
+    @EJB
+    public void setBoatTypeService(BoatTypeService service) {
         this.service = service;
     }
+
 
     public void init() throws IOException{
         Optional<BoatType> boatType = service.find(id);

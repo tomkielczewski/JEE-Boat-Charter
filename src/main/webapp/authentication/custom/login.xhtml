@@ -7,14 +7,14 @@
 
     <ui:define name="content">
         <article class="text--justified">
-            <header><h2>Login</h2></header>
+            <header><h2>#{messages.login}</h2></header>
             <section>
                 <h:form rendered="#{facesContext.externalContext.userPrincipal == null}">
                     <h:outputLabel value="Login:" for="login"/>
                     <h:inputText id="login" class="ui-control ui-input" value="#{userLogin.login}"/>
-                    <h:outputLabel value="Password:" for="password"/>
+                    <h:outputLabel value="#{messages.password}:" for="password"/>
                     <h:inputSecret id="password" class="ui-control ui-input" value="#{userLogin.password}"/>
-                    <h:commandButton class="ui-control ui-button" type="submit" value="Login" action="#{userLogin.loginAction()}"/>
+                    <h:commandButton class="ui-control ui-button" type="submit" value="#{messages.delete}" action="#{userLogin.loginAction()}"/>
                 </h:form>
             </section>
         </article>
