@@ -5,7 +5,6 @@ import lombok.Setter;
 import lombok.SneakyThrows;
 import lombok.extern.java.Log;
 import pl.edu.pg.eti.kask.boatcharter.boat.model.BoatCreateModel;
-import pl.edu.pg.eti.kask.boatcharter.user.notification.service.NewsletterService;
 import pl.edu.pg.eti.kask.boatcharter.user.observer.event.BroadcastMessageEvent;
 import pl.edu.pg.eti.kask.boatcharter.user.observer.event.DirectMessageEvent;
 import pl.edu.pg.eti.kask.boatcharter.user.observer.event.model.DirectMessage;
@@ -31,8 +30,6 @@ import static javax.security.enterprise.authentication.mechanism.http.Authentica
 @Named
 @Log
 public class Chat implements Serializable {
-
-    private NewsletterService newsletterService;
 
     private SecurityContext securityContext;
 
