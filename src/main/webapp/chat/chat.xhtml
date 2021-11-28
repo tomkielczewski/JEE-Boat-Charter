@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/WEB-INF/template/main.xhtml">
+
+<!--    pl.edu.pg.eti.kask.boatcharter.user.notification.service.NewsletterService.notifyAll-->
+
+    <ui:define name="content">
+        <f:loadBundle var="msg" basename="pl.edu.pg.eti.kask.boatcharter.about.i18n.msg"/>
+        <article class="text--justified">
+            <header><h2>#{messages['nav.chat']}</h2></header>
+            <section>
+                <section class="message-section">
+                    <header><h2>#{messages['chat.toAll']}</h2></header>
+                    <textarea class="ui-control" id="messageContainer" readonly="readonly"/>
+                </section>
+                <h:form id="broadcast">
+                    <div class="input-group">
+                        <h:inputText class="ui-control ui-input" id="message" value="#{chat.message}"/>
+                        <span class="input-group-btn">
+                            <h:commandButton value="#{messages['chat.send']}" action="#{chat.sendBroadCast()}" class="buttonstyle">
+                                <f:ajax execute="@this message" render="@this message" />
+                            </h:commandButton>
+                        </span>
+                    </div>
+                </h:form>
+            </section>
+
+            <section>
+                <section class="message-section">
+                    <header><h2>#{messages['chat.direct']}</h2></header>
+                    <textarea class="ui-control" id="privateMessageContainer" readonly="readonly"/>
+                </section>
+                <h:form id="private">
+                    <div class="input-group">
+                        <h:outputLabel for="receiver" value="#{messages['chat.to']}:"/>
+                        <h:inputText class="ui-control ui-input" id="receiver" value="#{chat.receiver}"/>
+                        <h:outputLabel for="private-message" value="#{messages.message}:"/>
+                        <h:inputText class="ui-control ui-input" id="private-message" value="#{chat.message}"/>
+                        <span class="input-group-btn">
+                            <h:commandButton value="#{messages['chat.send']}" action="#{chat.send()}" class="buttonstyle">
+                                <f:ajax execute="@form private" render="@this private-message" />
+                            </h:commandButton>
+                        </span>
+                    </div>
+                </h:form>
+            </section>
+        </article>
+    </ui:define>
+
+</ui:composition>

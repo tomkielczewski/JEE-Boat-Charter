@@ -18,7 +18,7 @@
         </h:head>
         <h:body>
 
-<!--            <f:websocket channel="broadcastChannel" scope="application" onmessage="receive"/>-->
+            <f:websocket channel="broadcastChannel" scope="application" onmessage="receive"/>
             <f:websocket rendered="#{facesContext.externalContext.userPrincipal != null}" channel="userChannel"
                          user="#{facesContext.externalContext.userPrincipal.name}" onmessage="receive"/>
 
@@ -45,6 +45,7 @@
                         <li><h:link outcome="/index.xhtml">#{messages['nav.main']}</h:link></li>
                         <li><h:link outcome="/about/about.xhtml">#{messages['nav.about']}</h:link></li>
                         <li><h:link outcome="/boat_type/boat_type_list.xhtml">#{messages['nav.boatTypes']}</h:link></li>
+                        <li><h:link outcome="/chat/chat.xhtml">#{messages['nav.chat']}</h:link></li>
                     </ul>
                 </nav>
 

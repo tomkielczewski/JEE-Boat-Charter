@@ -56,7 +56,7 @@ public class BoatCreate implements Serializable {
     }
 
     public String saveAction() {
-        boatService.create(BoatCreateModel.entityToModelCreator().apply(boat));
+        boatService.createForCallerPrincipal(BoatCreateModel.entityToModelCreator().apply(boat));
         return "/boat_type/boat_type_view?id=" + this.boatTypeId + "&faces-redirect=true";
 //        return "/boat_type/boat_type_view?id=" + 1 + "&faces-redirect=true";
     }
