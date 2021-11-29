@@ -6,10 +6,8 @@ import pl.edu.pg.eti.kask.boatcharter.boatType.entity.BoatType;
 import pl.edu.pg.eti.kask.boatcharter.watercraft.entity.Watercraft;
 import pl.edu.pg.eti.kask.boatcharter.user.entity.User;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.time.LocalDateTime;
 
 /**
  * Entity for game creature. Represents all creatures that can be found in the game as well as is base class for are
@@ -67,5 +65,20 @@ public class Boat extends Watercraft {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private byte[] picture;
+
+    /**
+     * This method is required due the bug in EclipseLink: https://www.eclipse.org/forums/index.php/t/820662/
+     */
+    @PrePersist
+    @Override
+    public void updateCreationDateTime() {
+        super.updateCreationDateTime();
+    }
+
+    @PreUpdate
+    @Override
+    public void updateUpdateDateTime() {
+        super.updateUpdateDateTime();
+    }
 
 }

@@ -3,6 +3,7 @@ package pl.edu.pg.eti.kask.boatcharter.boat.model;
 import lombok.*;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
@@ -41,6 +42,22 @@ public class BoatsModel implements Serializable {
          */
         private String name;
 
+        /**
+         * Edition version.
+         */
+        private Long version;
+
+        /**
+         * Creation datetime.
+         */
+        private LocalDateTime creationDateTime;
+
+        /**
+         * Update datetime.
+         */
+        private LocalDateTime updateDateTime;
+
+
     }
 
     /**
@@ -59,6 +76,9 @@ public class BoatsModel implements Serializable {
                     .map(boat -> Boat.builder()
                             .id(boat.getId())
                             .name(boat.getName())
+                            .creationDateTime(boat.getCreationDateTime())
+                            .updateDateTime(boat.getUpdateDateTime())
+                            .version(boat.getVersion())
                             .build())
                     .forEach(model::boat);
             return model.build();

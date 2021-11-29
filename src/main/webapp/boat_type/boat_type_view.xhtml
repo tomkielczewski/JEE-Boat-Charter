@@ -28,6 +28,23 @@
                         <h:outputText value="#{boat.name}"/>
                     </h:column>
                     <h:column>
+                        <f:facet name="header">version</f:facet>
+                        <h:outputText value="#{boat.version}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">creation</f:facet>
+                        <h:outputText value="#{boat.creationDateTime}">
+                            <f:convertDateTime type="localDateTime" pattern="yyyy-MM-dd HH:mm:ss"/>
+                        </h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">update</f:facet>
+                        <h:outputText value="#{boat.updateDateTime}">
+                            <f:convertDateTime type="localDateTime" pattern="yyyy-MM-dd HH:mm:ss"/>
+                        </h:outputText>
+                    </h:column>
+
+                    <h:column>
                         <f:facet name="header">#{messages.view}</f:facet>
                         <h:link styleClass="ui-button ui-control" outcome="/boat/boat_view.xhtml" value="#{messages.view}">
                             <f:param name="id" value="#{boat.id}"/>

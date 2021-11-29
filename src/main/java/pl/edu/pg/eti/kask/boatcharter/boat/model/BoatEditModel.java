@@ -37,6 +37,8 @@ public class BoatEditModel {
 
 //    private String picture;
 
+    private Long version;
+
 
     /**
      * @return mapper for convenient converting entity object to dto object
@@ -55,6 +57,7 @@ public class BoatEditModel {
                 .draught(boat.getDraught())
 //                .boatType(boat.getBoatType().getName())
 //                .picture(boat.getPicture())
+                .version(boat.getVersion())
                 .build();
     }
 
@@ -73,6 +76,7 @@ public class BoatEditModel {
 //            boat.setOwner(request.getOwner());
 //            boat.setBoatType(request.getBoatType());
 //                boat.setPicture("/api/pictures/" + request.getId());
+            boat.setVersion(request.getVersion());
             return boat;
         };
     }

@@ -2,6 +2,7 @@ package pl.edu.pg.eti.kask.boatcharter.watercraft.entity;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import pl.edu.pg.eti.kask.boatcharter.entity.VersionAndCreationDateAuditable;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,11 +17,11 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "watercrafts")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Watercraft implements Serializable {
+public class Watercraft extends VersionAndCreationDateAuditable implements Serializable {
 
     /**
      * Unique id (primary key).

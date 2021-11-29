@@ -48,7 +48,11 @@
 
 
                     <h:commandButton class="ui-control ui-button" value="#{messages.edit}"
-                                     action="#{boatEdit.saveAction()}"/><br/><br/>
+                                     action="#{boatEdit.saveAction()}">
+                        <f:ajax execute="@form" render="@form"/>
+                    </h:commandButton>
+                    <h:messages/>
+                    <br/><br/>
                 </h:form>
             </article>
         </h:panelGroup>
