@@ -29,4 +29,8 @@
     </library>
 
     <logging consoleLogLevel="INFO" />
+    <logging traceSpecification="eclipselink.sql=all"
+             traceFileName="stdout"
+             traceFormat="BASIC"/>
+
 </server>
