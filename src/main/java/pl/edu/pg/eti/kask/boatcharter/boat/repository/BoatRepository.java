@@ -1,6 +1,7 @@
 package pl.edu.pg.eti.kask.boatcharter.boat.repository;
 
 import pl.edu.pg.eti.kask.boatcharter.boat.entity.Boat;
+import pl.edu.pg.eti.kask.boatcharter.boat.entity.Boat_;
 import pl.edu.pg.eti.kask.boatcharter.boatType.entity.BoatType;
 import pl.edu.pg.eti.kask.boatcharter.repository.Repository;
 import pl.edu.pg.eti.kask.boatcharter.user.entity.User;
@@ -10,6 +11,9 @@ import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,7 +40,13 @@ public class BoatRepository implements Repository<Boat, Long> {
 
     @Override
     public List<Boat> findAll() {
-        return em.createQuery("select e from Boat e", Boat.class).getResultList();
+//        return em.createQuery("select e from Boat e", Boat.class).getResultList();
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Boat> query = cb.createQuery(Boat.class);
+        Root<Boat> root = query.from(Boat.class);
+        query.select(root);
+        return em.createQuery(query).getResultList();
+
     }
 
     @Override
@@ -67,7 +77,12 @@ public class BoatRepository implements Repository<Boat, Long> {
     }
 
     public void deleteAll() {
-        em.createQuery("select e from Boat e", Boat.class)
+//        em.createQuery("select e from Boat e", Boat.class)
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Boat> query = cb.createQuery(Boat.class);
+        Root<Boat> root = query.from(Boat.class);
+        query.select(root);
+        em.createQuery(query)
                 .getResultList().forEach(this::delete);
     }
 
@@ -78,9 +93,15 @@ public class BoatRepository implements Repository<Boat, Long> {
      * @return list (can be empty) of boats
      */
     public List<Boat> findAllByType(BoatType boatType) {
-        return em.createQuery("select e from Boat e where e.boatType = :boatType", Boat.class)
-                .setParameter("boatType", boatType)
-                .getResultList();
+//        return em.createQuery("select e from Boat e where e.boatType = :boatType", Boat.class)
+//                .setParameter("boatType", boatType)
+//                .getResultList();
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Boat> query = cb.createQuery(Boat.class);
+        Root<Boat> root = query.from(Boat.class);
+        query.select(root)
+                .where(cb.equal(root.get(Boat_.boatType), boatType));
+        return em.createQuery(query).getResultList();
     }
 
 
@@ -93,13 +114,26 @@ public class BoatRepository implements Repository<Boat, Long> {
      */
     public Optional<Boat> findByIdAndUser(Long id, User user) {
         try {
-            return Optional.of(em.createQuery("select c from Boat c where c.id = :id and c.owner = :user", Boat.class)
-                    .setParameter("user", user)
-                    .setParameter("id", id)
-                    .getSingleResult());
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Boat> query = cb.createQuery(Boat.class);
+            Root<Boat> root = query.from(Boat.class);
+            query.select(root)
+                    .where(cb.and(
+//                            cb.equal(root.get(Boat_.user).get(User_.name), user.getName()),
+                            cb.equal(root.get(Boat_.owner), user),
+                            cb.equal(root.get(Boat_.id), id)));
+            return Optional.of(em.createQuery(query).getSingleResult());
         } catch (NoResultException ex) {
             return Optional.empty();
         }
+//        try {
+//            return Optional.of(em.createQuery("select c from Boat c where c.id = :id and c.owner = :user", Boat.class)
+//                    .setParameter("user", user)
+//                    .setParameter("id", id)
+//                    .getSingleResult());
+//        } catch (NoResultException ex) {
+//            return Optional.empty();
+//        }
     }
 
     /**
@@ -109,16 +143,32 @@ public class BoatRepository implements Repository<Boat, Long> {
      * @return list (can be empty) of user's boats
      */
     public List<Boat> findAllByUser(User user) {
-        return em.createQuery("select c from Boat c where c.owner = :user", Boat.class)
-                .setParameter("user", user)
-                .getResultList();
+//        return em.createQuery("select c from Boat c where c.owner = :user", Boat.class)
+//                .setParameter("user", user)
+//                .getResultList();
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Boat> query = cb.createQuery(Boat.class);
+        Root<Boat> root = query.from(Boat.class);
+        query.select(root)
+                .where(cb.equal(root.get(Boat_.owner), user));
+        return em.createQuery(query).getResultList();
+
     }
 
     public List<Boat> findAllByUserAndBoatType(User user, BoatType boatType) {
-        return em.createQuery("select b from Boat b where b.owner = :user and b.boatType = :boatType", Boat.class)
-                .setParameter("user", user)
-                .setParameter("boatType", boatType)
-                .getResultList();
+//        return em.createQuery("select b from Boat b where b.owner = :user and b.boatType = :boatType", Boat.class)
+//                .setParameter("user", user)
+//                .setParameter("boatType", boatType)
+//                .getResultList();
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Boat> query = cb.createQuery(Boat.class);
+        Root<Boat> root = query.from(Boat.class);
+        query.select(root)
+                .where(cb.and(
+                        cb.equal(root.get(Boat_.owner), user),
+                        cb.equal(root.get(Boat_.boatType), boatType)
+                ));
+        return em.createQuery(query).getResultList();
     }
 
     /**
@@ -129,11 +179,23 @@ public class BoatRepository implements Repository<Boat, Long> {
      * @return single boat with selected id and boatType if exists
      */
     public Optional<Boat> findByBoatTypeAndId(BoatType boatType, Long id) {
+//        try {
+//            return Optional.of(em.createQuery("select c from Boat c where c.id = :id and c.boatType = :boatType", Boat.class)
+//                    .setParameter("boatType", boatType)
+//                    .setParameter("id", id)
+//                    .getSingleResult());
+//        } catch (NoResultException ex) {
+//            return Optional.empty();
+//        }
         try {
-            return Optional.of(em.createQuery("select c from Boat c where c.id = :id and c.boatType = :boatType", Boat.class)
-                    .setParameter("boatType", boatType)
-                    .setParameter("id", id)
-                    .getSingleResult());
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Boat> query = cb.createQuery(Boat.class);
+            Root<Boat> root = query.from(Boat.class);
+            query.select(root)
+                    .where(cb.and(
+                            cb.equal(root.get(Boat_.boatType), boatType),
+                            cb.equal(root.get(Boat_.id), id)));
+            return Optional.of(em.createQuery(query).getSingleResult());
         } catch (NoResultException ex) {
             return Optional.empty();
         }

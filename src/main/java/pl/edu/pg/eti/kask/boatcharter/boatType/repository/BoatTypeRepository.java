@@ -9,6 +9,9 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,7 +39,13 @@ public class BoatTypeRepository implements Repository<BoatType, Long> {
 
     @Override
     public List<BoatType> findAll() {
-        return em.createQuery("select r from BoatType r", BoatType.class).getResultList();
+//        return em.createQuery("select r from BoatType r", BoatType.class).getResultList();
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<BoatType> query = cb.createQuery(BoatType.class);
+        Root<BoatType> root = query.from(BoatType.class);
+        query.select(root);
+        return em.createQuery(query).getResultList();
+
     }
 
 
@@ -56,7 +65,12 @@ public class BoatTypeRepository implements Repository<BoatType, Long> {
     }
 
     public void deleteAll() {
-        em.createQuery("select r from BoatType r", BoatType.class)
+//        em.createQuery("select r from BoatType r", BoatType.class)
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<BoatType> query = cb.createQuery(BoatType.class);
+        Root<BoatType> root = query.from(BoatType.class);
+        query.select(root);
+        em.createQuery(query)
                 .getResultList()
                 .forEach(this::delete);
     }
